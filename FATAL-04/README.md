@@ -7,8 +7,7 @@ impordib Dorico 6.2.30-sse korrektselt. FATAL-03-s viidi Voice 2-sse
 üksnes trioleti viimane noot ning eksport kaotas trioleti seose selle
 noodiga. Siin luuakse kogu triolett algusest peale Voice 2-s.
 
-`FATAL-04` on testiseeria tunnus. Juhtumi raskusaste selgub alles XML-i
-ja Dorico tulemuse põhjal.
+`FATAL-04` on testiseeria tunnus; tegelik tulemus on korras import.
 
 ## Finale'is tegemine
 
@@ -39,9 +38,29 @@ sisaldab ainult takti 2 tavapäraselt sisestatud kahte häält.
 Kui Finale eksport erineb sellest, kirjeldame tegelikku XML-i enne
 juhtumi klassifitseerimist.
 
+## XML-i tulemus
+
+- `divisions` on 6; 4/4 takti kestus on 24 division'it;
+- Voice 1 sisaldab nelja C4 veerandnooti kestustega 6 + 6 + 6 + 6;
+- Voice 2 sisaldab kolme G4 triolettveerandnooti kestustega 4 + 4 + 4
+  ja G4 poolnooti kestusega 12;
+- mõlema hääle ajajoon ulatub eraldi 24 division'ini;
+- trioleti start ja stop on Voice 2 nootidel; kõigil kolmel on 3:2
+  `time-modification`;
+- XML kasutab häälte vahel `backup` elemente ning on süntaktiliselt
+  korrektne;
+- taktid 1, 3 ja 4 vastavad baasfailile pärast `divisions`
+  normaliseerimist;
+- validaator ei anna leide.
+
 ## Dorico tulemus
 
-Ootel.
+Kasutaja sõnul avaneb MusicXML Dorico 6.2.30-s ideaalselt.
+Ekraanipilti selle katse jaoks ei salvestatud.
+
+Järeldus: terve, korrektselt ajastatud Finale Voice 2 triolett ei ole
+iseenesest fataalne. FATAL-03 viga nõuab täpsemat katkist struktuuri;
+see kontrolljuhtum aitab tulevasi reegleid piirata.
 
 ## Allikad
 

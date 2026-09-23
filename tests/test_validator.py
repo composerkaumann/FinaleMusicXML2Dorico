@@ -84,6 +84,12 @@ class MeasureDurationTests(unittest.TestCase):
         self.assertEqual(finding.actual_duration, 16)
         self.assertEqual(finding.underflow, 8)
 
+    def test_fatal_04_complete_voice_2_tuplet_has_no_findings(self) -> None:
+        self.assertEqual(
+            validate(ROOT / "FATAL-04/FATAL-04.musicxml"),
+            [],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

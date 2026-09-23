@@ -1,7 +1,7 @@
 {
   "id": "FATAL-04",
   "title": "Complete tuplet in Finale Voice 2",
-  "status": "awaiting-source-files",
+  "status": "complete",
   "source_file": "FATAL-04.musx",
   "export_file": "FATAL-04.musicxml",
   "derived_from": "../BASE/FMD-BASE.musx",
@@ -25,7 +25,36 @@
     "tuplet_start_and_stop_both_in_voice_2": true,
     "each_voice_fills_four_quarter_beats": true
   },
-  "xml_observation": null,
-  "classification": null,
-  "dorico_result": null
+  "xml_observation": {
+    "xml_well_formed": true,
+    "divisions": 6,
+    "time_signature": "4/4",
+    "expected_measure_duration": 24,
+    "voice_1_note_durations": [6, 6, 6, 6],
+    "voice_2_note_durations": [4, 4, 4, 12],
+    "voice_1_extent": 24,
+    "voice_2_extent": 24,
+    "tuplet_ratio": "3:2",
+    "tuplet_start_voice": "2",
+    "tuplet_stop_voice": "2",
+    "control_measures_1_3_4_match_base_rhythm": true
+  },
+  "classification": {
+    "severity": "none",
+    "validator_findings": 0,
+    "fatal": false,
+    "conclusion": "A complete, correctly timed Finale Voice 2 tuplet imports correctly."
+  },
+  "dorico_result": {
+    "application": "Dorico",
+    "version": "6.2.30",
+    "import_completed": true,
+    "result": "User reports an ideal import.",
+    "data_loss_reported": false,
+    "evidence_file": null
+  },
+  "sha256": {
+    "FATAL-04.musx": "de1b88f0a755024a56bb4a6f7c7b1b142fd44f415c549bb491b58516e18efa24",
+    "FATAL-04.musicxml": "8f6c66528c8a31fe39b4c306e0f474df3b36b0d073a70d054e9b6890395f47f9"
+  }
 }
