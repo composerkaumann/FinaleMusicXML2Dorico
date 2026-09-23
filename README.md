@@ -69,7 +69,9 @@ Praegu rakendatud reegel:
    4/4 taktis; Dorico importis selle korrektselt
 5. \`FATAL-02b\` — Finale Fill with Rests lisab tegelikust vabast
    ruumist pikema poolpausi; kinnitatud \`fatal\`
-6. \`FATAL-03\` — tuplet start/stop voice mismatch
+6. \`FATAL-03\` — Voice 2 Launch trioletis; Dorico 6.2.30 kaotas
+   kolmanda triolettnoodi ja taktid 3–4. Algne eri häälte start/stop
+   hüpotees XML-is ei täitunud; olemasolev \`FMD003\` leiab ajajoonevea
 7. \`FATAL-04\` — Finale Voice 2 + tuplet
 8. \`FATAL-05\` — cross-staff tuplet / missing or ambiguous voice
 9. \`FATAL-06\` — illegal MusicXML duration

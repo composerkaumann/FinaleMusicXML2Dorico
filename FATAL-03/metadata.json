@@ -1,7 +1,7 @@
 {
   "id": "FATAL-03",
-  "title": "Tuplet start/stop voice mismatch",
-  "status": "awaiting-source-files",
+  "title": "Voice 2 Launch disrupts tuplet import",
+  "status": "complete",
   "source_file": "FATAL-03.musx",
   "export_file": "FATAL-03.musicxml",
   "derived_from": "../BASE/FMD-BASE.musx",
@@ -9,13 +9,62 @@
     "part_id": "P1",
     "measure": "2"
   },
-  "planned_finale_action": "Change only the final triplet entry's Voice 2 flag in Edit Frame after creating a complete 4/4 Voice 1 measure.",
+  "finale_action": {
+    "entry": "final triplet note in measure 2",
+    "edit_frame_flags_enabled": [
+      "Voice 2",
+      "V2 Launch"
+    ],
+    "voice_2_only_result": "Finale immediately rearranged the measure, according to the user's observation."
+  },
   "target_xml_signature": {
     "same_part_and_measure": true,
     "same_tuplet_number": true,
     "start_and_stop_note_voices_differ": true
   },
-  "xml_observation": null,
-  "classification": null,
-  "dorico_result": null
+  "xml_observation": {
+    "xml_well_formed": true,
+    "divisions": 6,
+    "time_signature": "4/4",
+    "expected_measure_duration": 24,
+    "actual_measure_extent": 16,
+    "tuplet_start": {
+      "voice": "1",
+      "entry": "first C4 quarter note"
+    },
+    "tuplet_stop": {
+      "voice": "1",
+      "entry": "half rest"
+    },
+    "third_c4": {
+      "voice": "2",
+      "duration": 6,
+      "time_modification_present": false,
+      "tuplet_stop_present": false
+    },
+    "control_measures_1_3_4_match_base_rhythm": true,
+    "target_signature_present": false
+  },
+  "classification": {
+    "new_rule": null,
+    "existing_validator_finding": "FMD003",
+    "severity": "fatal",
+    "fatal_03_confirmed": true,
+    "original_voice_mismatch_hypothesis_confirmed": false,
+    "specific_cause_of_later_measure_loss": "undetermined"
+  },
+  "sha256": {
+    "FATAL-03.musx": "af4f0c97c48723817574f7579558940f42ef41a59267dcce1d559565fed7a22f",
+    "FATAL-03.musicxml": "1aef7438f6b7a910f0968d5617acab895d8a844ef52239676930"
+  },
+  "dorico_result": {
+    "application": "Dorico",
+    "version": "6.2.30",
+    "import_completed": true,
+    "data_loss": true,
+    "result": "The third tuplet note is replaced by a rest, and measures 3 and 4 are missing.",
+    "xml_contains_measures_3_and_4": true,
+    "classification_confirmed_by_user": true,
+    "evidence_file": null
+  }
 }

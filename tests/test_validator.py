@@ -71,6 +71,19 @@ class MeasureDurationTests(unittest.TestCase):
         self.assertEqual(finding.actual_duration, 28)
         self.assertEqual(finding.overflow, 4)
 
+    def test_fatal_03_detects_incomplete_timeline_after_voice_2_launch(self) -> None:
+        findings = validate(ROOT / "FATAL-03/FATAL-03.musicxml")
+
+        self.assertEqual(len(findings), 1)
+        finding = findings[0]
+        self.assertEqual(finding.rule_id, "FMD003")
+        self.assertEqual(finding.severity, "fatal")
+        self.assertEqual(finding.part_id, "P1")
+        self.assertEqual(finding.measure, "2")
+        self.assertEqual(finding.expected_duration, 24)
+        self.assertEqual(finding.actual_duration, 16)
+        self.assertEqual(finding.underflow, 8)
+
 
 if __name__ == "__main__":
     unittest.main()
