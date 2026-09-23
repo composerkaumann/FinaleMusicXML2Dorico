@@ -1,0 +1,32 @@
+{
+  "id": "FATAL-04b",
+  "title": "Voice 1 quarter-note triplet with simultaneous ordinary Voice 2 half note",
+  "status": "awaiting-source-files",
+  "source_file": "FATAL-04b.musx",
+  "export_file": "FATAL-04b.musicxml",
+  "derived_from": "../FATAL-04a/FATAL-04a.musx",
+  "test_location": {
+    "part_id": "P1",
+    "measure": "2",
+    "voices": ["1", "2"],
+    "second_half_of_measure": true
+  },
+  "planned_finale_content": {
+    "voice_1_first_half": "C4 half note",
+    "voice_1_second_half": "G4 quarter note x3 as a 3:2 tuplet",
+    "voice_2_second_half": "E4 ordinary half note simultaneous with the Voice 1 tuplet",
+    "tuplet_definition_actual": "3 quarter notes",
+    "tuplet_definition_normal": "2 quarter notes",
+    "edit_frame_used": false,
+    "fill_with_rests_used": false
+  },
+  "target_xml_checks": [
+    "note durations, start offsets, and measure extent in both voices",
+    "note types and time-modification",
+    "tuplet start/stop in Voice 1",
+    "comparison with FATAL-04a"
+  ],
+  "xml_observation": null,
+  "classification": null,
+  "dorico_result": null
+}

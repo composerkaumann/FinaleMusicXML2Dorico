@@ -1,0 +1,30 @@
+{
+  "id": "FATAL-04a",
+  "title": "Voice 1 quarter-note triplet with half-note tuplet definition and Voice 2 half note",
+  "status": "awaiting-source-files",
+  "source_file": "FATAL-04a.musx",
+  "export_file": "FATAL-04a.musicxml",
+  "derived_from": "../BASE/FMD-BASE.musx",
+  "test_location": {
+    "part_id": "P1",
+    "measure": "2",
+    "voices": ["1", "2"],
+    "second_half_of_measure": true
+  },
+  "planned_finale_content": {
+    "voice_1_first_half": "C4 half note",
+    "voice_1_second_half": "G4 quarter note x3 as a 3:2 tuplet",
+    "voice_2_second_half": "E4 ordinary half note simultaneous with the Voice 1 tuplet",
+    "tuplet_definition_actual": "3 half notes",
+    "tuplet_definition_normal": "2 half notes",
+    "fill_with_rests_used": false
+  },
+  "target_xml_checks": [
+    "note durations and measure extent",
+    "note types and time-modification",
+    "tuplet display types and start/stop"
+  ],
+  "xml_observation": null,
+  "classification": null,
+  "dorico_result": null
+}

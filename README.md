@@ -75,8 +75,13 @@ Praegu rakendatud reegel:
 7. \`FATAL-04\` — täielik 3:2 triolett Finale Voice 2-s koos nelja
    löögini täidetud Voice 1 ja Voice 2-ga; Dorico import korras,
    validaatoril leide pole
-8. \`FATAL-05\` — cross-staff tuplet / missing or ambiguous voice
-9. \`FATAL-06\` — illegal MusicXML duration
-10. \`FATAL-07\` — Human Playback hidden-note rhythmic residue
+8. \`FATAL-04a\` — Voice 1 teises taktiosas triolettveerandnoodid ja
+   samaaegne Voice 2 poolnoot; trioleti vale poolnoodidefinitsioon,
+   tulemus ootel
+9. \`FATAL-04b\` — sama kahe hääle materjal, kuid korrektne
+   veerandnooditrioleti definitsioon; kontrollkatse, tulemus ootel
+10. \`FATAL-05\` — cross-staff tuplet / missing or ambiguous voice
+11. \`FATAL-06\` — illegal MusicXML duration
+12. \`FATAL-07\` — Human Playback hidden-note rhythmic residue
 
 Teste tehakse rangelt selles järjekorras.
