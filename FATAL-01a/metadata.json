@@ -1,7 +1,7 @@
 {
   "id": "FATAL-01a",
   "title": "Conflicting measure durations between parts",
-  "status": "awaiting-source-files",
+  "status": "complete",
   "source_file": "FATAL-01a.musx",
   "export_file": "FATAL-01a.musicxml",
   "derived_from": "../BASE/FMD-BASE.musx",
@@ -9,16 +9,46 @@
     "measure": "2",
     "parts": {
       "P1": {
-        "expected_extent": 8,
-        "planned_content": "valid 4/4 content"
+        "declared_measure_duration": 8,
+        "actual_extent": 10,
+        "content": "C4 quarter x3; C4 half"
       },
       "P2": {
-        "expected_extent": 10,
-        "planned_content": "C4 quarter x3; C4 half"
+        "declared_measure_duration": 8,
+        "actual_extent": 8,
+        "content": "C4 quarter x4"
       }
     }
   },
   "hypothesis": "Part-local recovery may fail or alter alignment when simultaneous parts disagree about measure duration.",
-  "dorico_result": null
+  "musicxml_observation": {
+    "xml_well_formed": true,
+    "divisions": 2,
+    "time_signature": "4/4",
+    "conflicting_measure_extents": {
+      "P1": 10,
+      "P2": 8
+    },
+    "extent_difference": 2
+  },
+  "classification": {
+    "rule_ids": [
+      "FMD001",
+      "FMD002"
+    ],
+    "severity": "warning",
+    "category": "cross-part-rhythmic-timeline",
+    "fatal_in_dorico_6_2_30": false
+  },
+  "dorico_result": {
+    "application": "Dorico",
+    "version": "6.2.30",
+    "import_completed": true,
+    "result": "A quarter rest was added to the second staff.",
+    "interpretation": "Dorico used the longer five-beat extent and padded the shorter part by two divisions."
+  },
+  "sha256": {
+    "FATAL-01a.musx": "840782e17b28f90b949ab03e162af0a50f5a001ba4fcb96bcc449f7af7eba744",
+    "FATAL-01a.musicxml": "a14c0181012cc4f1270f50af29a1f7a5d88b29f854f8b0f1147a5a68e6411dc1"
+  }
 }
-

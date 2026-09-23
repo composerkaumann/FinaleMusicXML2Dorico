@@ -7,31 +7,33 @@ instrumendis.
 
 ## Finale'i test
 
-Loo FMD-BASE-ist kahe instrumendiga koopia. Muuda ainult takti 2:
+FMD-BASE-ist loodi kahe instrumendiga koopia. Taktis 2:
 
-- instrument 1: täpselt 4 lööki;
-- instrument 2: kolm C4 veerandnooti ja üks C4 poolnoot, kokku 5 lööki.
+- P1: kolm C4 veerandnooti ja üks C4 poolnoot, kokku 5 lööki;
+- P2: neli C4 veerandnooti, kokku 4 lööki.
 
-Taktid 1, 3 ja 4 peavad mõlemas instrumendis olema korrektsed. Ekspordi
-pakkimata MusicXML failina ka juhul, kui Finale kuvab hoiatuse.
+Taktid 1, 3 ja 4 on mõlemas instrumendis rütmiliselt korrektsed.
 
 Failid:
 
 - \`FATAL-01a.musx\`
 - \`FATAL-01a.musicxml\`
 
-## Kontrollitav hüpotees
+## XML-i tulemus
 
-Partii P1 takti 2 ajajoon lõpeb kestusel 8 ja partii P2 sama takt kestusel
-10. Kontrollime, kas Dorico:
+- mõlemad partiid deklareerivad 4/4 takti kestuseks 8 division’it;
+- P1 takti 2 tegelik ulatus on 10;
+- P2 takti 2 tegelik ulatus on 8;
+- partiiülene erinevus on 2 division’it ehk üks veerandnoot;
+- XML on well-formed.
 
-1. impordib mõlemad partiid ja lisab ainult P2-le peidetud lokaalse
-   taktimõõdumuutuse;
-2. muudab mõlema partii taktimõõtu või joondust;
-3. kaotab või nihutab materjali järgmistes taktides;
-4. katkestab impordi.
+Validaator annab P1 ületäituvuse kohta \`FMD001\` ja partiide omavahelise
+erinevuse kohta \`FMD002\`. Mõlema raskusaste on \`warning\`.
 
 ## Dorico tulemus
 
-Ootel.
+Dorico 6.2.30 import õnnestus. Teisele reale lisandus veerandpaus.
 
+Tulemus on kooskõlas sellega, et Dorico võttis takti ulatuseks pikema P1
+ajajoone (10) ja täitis P2 puuduva kestuse 2 division’i pikkuse pausiga.
+See seletus on XML-i ja nähtava tulemuse põhjal tehtud järeldus.

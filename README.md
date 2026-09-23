@@ -48,12 +48,15 @@ Praegu rakendatud reegel:
 
 - \`FMD001\` — takti rütmiline ajajoon ületab aktiivse taktimõõdu kestust
   (\`warning\`; Dorico 6.2.30 taastus ühe partii FATAL-01 testist).
+- \`FMD002\` — sama takti tegelik rütmiline ulatus erineb partiide vahel
+  hoolimata samast deklareeritud taktikestusest (\`warning\`).
 
 ## Testide järjekord
 
 1. \`FATAL-01\` — measure duration mismatch / overfilled measure; Dorico
    6.2.30 taastus peidetud lokaalse taktimõõdumuutusega
-2. \`FATAL-01a\` — conflicting measure durations between two parts
+2. \`FATAL-01a\` — conflicting measure durations between two parts;
+   Dorico 6.2.30 täitis lühema partii veerandpausiga
 3. \`FATAL-02\` — tuplet timeline mismatch
 4. \`FATAL-03\` — tuplet start/stop voice mismatch
 5. \`FATAL-04\` — Finale Voice 2 + tuplet

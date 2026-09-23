@@ -24,6 +24,7 @@ class Finding:
     actual_duration: int
     overflow: int
     divisions: int
+    observed_extents: dict[str, int] | None = None
 
 
 def local_name(tag: str) -> str:
@@ -110,15 +111,19 @@ def validate(path: Path) -> list[Finding]:
         raise ValueError("only score-partwise MusicXML is currently supported")
 
     findings: list[Finding] = []
+    measure_extents: dict[
+        int, list[tuple[str, str, int, int, int]]
+    ] = {}
     for part in (item for item in root if local_name(item.tag) == "part"):
         part_id = part.get("id", "")
         divisions: int | None = None
         beats: int | None = None
         beat_type: int | None = None
 
-        for measure in (
+        measures = [
             item for item in part if local_name(item.tag) == "measure"
-        ):
+        ]
+        for measure_index, measure in enumerate(measures):
             attributes = child(measure, "attributes")
             if attributes is not None:
                 divisions_text = child_text(attributes, "divisions")
@@ -137,6 +142,16 @@ def validate(path: Path) -> list[Finding]:
 
             expected = expected_duration(divisions, beats, beat_type)
             actual = measure_extent(measure)
+            measure_number = measure.get("number", "")
+            measure_extents.setdefault(measure_index, []).append(
+                (
+                    part_id,
+                    measure_number,
+                    expected,
+                    actual,
+                    divisions,
+                )
+            )
             if actual > expected:
                 overflow = actual - expected
                 findings.append(
@@ -144,18 +159,51 @@ def validate(path: Path) -> list[Finding]:
                         rule_id="FMD001",
                         severity="warning",
                         message=(
-                            f"Measure {measure.get('number', '')} in part "
+                            f"Measure {measure_number} in part "
                             f"{part_id} extends to {actual} divisions; "
                             f"expected at most {expected}."
                         ),
                         part_id=part_id,
-                        measure=measure.get("number", ""),
+                        measure=measure_number,
                         expected_duration=expected,
                         actual_duration=actual,
                         overflow=overflow,
                         divisions=divisions,
                     )
                 )
+
+    for rows in measure_extents.values():
+        if len(rows) < 2:
+            continue
+        expected_values = {row[2] for row in rows}
+        observed = {row[0]: row[3] for row in rows}
+        if len(expected_values) != 1 or len(set(observed.values())) == 1:
+            continue
+
+        expected = rows[0][2]
+        shortest = min(observed.values())
+        longest = max(observed.values())
+        part_summary = ", ".join(
+            f"{part_id}={extent}" for part_id, extent in observed.items()
+        )
+        findings.append(
+            Finding(
+                rule_id="FMD002",
+                severity="warning",
+                message=(
+                    f"Measure {rows[0][1]} has conflicting rhythmic "
+                    f"extents across parts ({part_summary}); all parts "
+                    f"declare a duration of {expected}."
+                ),
+                part_id=",".join(observed),
+                measure=rows[0][1],
+                expected_duration=expected,
+                actual_duration=longest,
+                overflow=longest - shortest,
+                divisions=rows[0][4],
+                observed_extents=observed,
+            )
+        )
 
     return findings
 

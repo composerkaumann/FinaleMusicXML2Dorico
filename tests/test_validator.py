@@ -27,6 +27,18 @@ class MeasureDurationTests(unittest.TestCase):
         self.assertEqual(finding.overflow, 2)
         self.assertEqual(finding.divisions, 2)
 
+    def test_fatal_01a_detects_cross_part_disagreement(self) -> None:
+        findings = validate(ROOT / "FATAL-01a/FATAL-01a.musicxml")
+
+        self.assertEqual([item.rule_id for item in findings], ["FMD001", "FMD002"])
+        mismatch = findings[1]
+        self.assertEqual(mismatch.severity, "warning")
+        self.assertEqual(mismatch.measure, "2")
+        self.assertEqual(mismatch.expected_duration, 8)
+        self.assertEqual(mismatch.actual_duration, 10)
+        self.assertEqual(mismatch.overflow, 2)
+        self.assertEqual(mismatch.observed_extents, {"P1": 10, "P2": 8})
+
 
 if __name__ == "__main__":
     unittest.main()
