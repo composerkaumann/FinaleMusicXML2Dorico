@@ -1,0 +1,31 @@
+{
+  "id": "FATAL-04",
+  "title": "Complete tuplet in Finale Voice 2",
+  "status": "awaiting-source-files",
+  "source_file": "FATAL-04.musx",
+  "export_file": "FATAL-04.musicxml",
+  "derived_from": "../BASE/FMD-BASE.musx",
+  "test_location": {
+    "part_id": "P1",
+    "measure": "2",
+    "voices": [
+      "1",
+      "2"
+    ]
+  },
+  "planned_finale_content": {
+    "voice_1": "C4 quarter x4",
+    "voice_2": "G4 quarter triplet 3:2 x3; G4 half",
+    "voice_2_entry_method": "Speedy Entry apostrophe from first Voice 1 note",
+    "edit_frame_used": false,
+    "fill_with_rests_used": false
+  },
+  "target_xml_signature": {
+    "two_voices_in_measure_2": true,
+    "tuplet_start_and_stop_both_in_voice_2": true,
+    "each_voice_fills_four_quarter_beats": true
+  },
+  "xml_observation": null,
+  "classification": null,
+  "dorico_result": null
+}

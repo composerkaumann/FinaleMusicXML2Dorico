@@ -72,7 +72,8 @@ Praegu rakendatud reegel:
 6. \`FATAL-03\` — Voice 2 Launch trioletis; Dorico 6.2.30 kaotas
    kolmanda triolettnoodi ja taktid 3–4. Algne eri häälte start/stop
    hüpotees XML-is ei täitunud; olemasolev \`FMD003\` leiab ajajoonevea
-7. \`FATAL-04\` — Finale Voice 2 + tuplet
+7. \`FATAL-04\` — täielik 3:2 triolett Finale Voice 2-s koos nelja
+   löögini täidetud Voice 1 ja Voice 2-ga; tulemus ootel
 8. \`FATAL-05\` — cross-staff tuplet / missing or ambiguous voice
 9. \`FATAL-06\` — illegal MusicXML duration
 10. \`FATAL-07\` — Human Playback hidden-note rhythmic residue
