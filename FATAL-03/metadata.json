@@ -53,8 +53,13 @@
     "original_voice_mismatch_hypothesis_confirmed": false,
     "specific_cause_of_later_measure_loss": "undetermined"
   },
+  "source_export_parity": {
+    "source_saved_after_current_xml_export": true,
+    "current_source_reexported_and_compared": false,
+    "note": "The Finale score.dat payload changed after the analyzed MusicXML export; XML conclusions refer to the existing export."
+  },
   "sha256": {
-    "FATAL-03.musx": "af4f0c97c48723817574f7579558940f42ef41a59267dcce1d559565fed7a22f",
+    "FATAL-03.musx": "ae96921d6d9ac4b3e792a8014d105bc81e0196ef565950353af35c63e0d96da6",
     "FATAL-03.musicxml": "1aef7438f6b7a910f0968d5617acab895d8a844ef52239676930"
   },
   "dorico_result": {

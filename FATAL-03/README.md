@@ -60,6 +60,14 @@ Tulemus kinnitab FATAL-03 faili fataalsuse, kuid ei eralda üheselt,
 kas hilisemate taktide kadumise põhjustab Voice 2-sse viidud noot,
 Voice 1-sse sattunud trioleti lõpp poolpausil või alatäidetud ajajoon.
 
+## Allikafaili seis
+
+Pärast siin analüüsitud MusicXML-i eksporti salvestati `FATAL-03.musx`
+uuesti. Selle sisemine `score.dat` muutus, kuid MusicXML-i ei eksporditud
+uuesti. Praeguse `.musx` ja analüüsitud `.musicxml` täpne vastavus on
+seetõttu kontrollimata; Dorico tähelepanek ja validaatorileid põhinevad
+olemasoleval MusicXML-il.
+
 ## Allikad
 
 - [Finale for Mac: Edit Frame](https://usermanuals.finalemusic.com/FinaleMac/Content/Finale/SPFRMDLG.htm)
