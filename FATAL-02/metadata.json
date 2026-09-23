@@ -1,0 +1,35 @@
+{
+  "id": "FATAL-02",
+  "title": "Tuplet timeline mismatch",
+  "status": "awaiting-source-files",
+  "source_file": "FATAL-02.musx",
+  "export_file": "FATAL-02.musicxml",
+  "derived_from": "../BASE/FMD-BASE.musx",
+  "test_location": {
+    "part_id": "P1",
+    "measure": "2",
+    "voice": "1"
+  },
+  "planned_finale_content": {
+    "tuplet_ratio": "3:2",
+    "tuplet_unit": "quarter",
+    "pitches": [
+      "C4",
+      "C4",
+      "C4"
+    ],
+    "member_types_after_edit": [
+      "quarter",
+      "quarter",
+      "half"
+    ],
+    "excluded_features": [
+      "Voice 2",
+      "cross-staff",
+      "hidden notes"
+    ]
+  },
+  "xml_observation": null,
+  "classification": null,
+  "dorico_result": null
+}
