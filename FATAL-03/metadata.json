@@ -1,0 +1,21 @@
+{
+  "id": "FATAL-03",
+  "title": "Tuplet start/stop voice mismatch",
+  "status": "awaiting-source-files",
+  "source_file": "FATAL-03.musx",
+  "export_file": "FATAL-03.musicxml",
+  "derived_from": "../BASE/FMD-BASE.musx",
+  "test_location": {
+    "part_id": "P1",
+    "measure": "2"
+  },
+  "planned_finale_action": "Change only the final triplet entry's Voice 2 flag in Edit Frame after creating a complete 4/4 Voice 1 measure.",
+  "target_xml_signature": {
+    "same_part_and_measure": true,
+    "same_tuplet_number": true,
+    "start_and_stop_note_voices_differ": true
+  },
+  "xml_observation": null,
+  "classification": null,
+  "dorico_result": null
+}
