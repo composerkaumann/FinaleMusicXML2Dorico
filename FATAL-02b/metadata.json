@@ -1,0 +1,54 @@
+{
+  "id": "FATAL-02b",
+  "title": "Overfilling rest after an incomplete tuplet",
+  "status": "complete",
+  "source_file": "FATAL-02b.musx",
+  "export_file": "FATAL-02b.musicxml",
+  "derived_from": "../FATAL-02/FATAL-02.musx",
+  "test_location": {
+    "part_id": "P1",
+    "measure": "2",
+    "voice": "1"
+  },
+  "finale_action": "Fill with Rests",
+  "xml_observation": {
+    "xml_well_formed": true,
+    "divisions": 6,
+    "time_signature": "4/4",
+    "expected_measure_duration": 24,
+    "tuplet_note_durations": [
+      4,
+      4,
+      8
+    ],
+    "extent_before_added_rest": 16,
+    "actual_free_duration": 8,
+    "added_rest": {
+      "type": "half",
+      "duration": 12
+    },
+    "actual_measure_extent": 28,
+    "overflow": 4
+  },
+  "classification": {
+    "rule_id": "FMD004",
+    "severity": "fatal",
+    "category": "tuplet-rest-fill-timeline",
+    "summary": "A rest added after a tuplet extends the measure beyond its declared duration.",
+    "fatal_effect": "Dorico drops an exported pitched note and replaces the malformed timeline with rests."
+  },
+  "dorico_result": {
+    "application": "Dorico",
+    "version": "6.2.30",
+    "import_completed": true,
+    "data_loss": true,
+    "result": "The exported C4 half note is lost and Dorico shows rests.",
+    "evidence_file": "Fatal02bDorico.png",
+    "classification_confirmed_by_user": true
+  },
+  "sha256": {
+    "FATAL-02b.musx": "68340c89ea7d36604b9e7d58ddb4eb2654071fa2062398c601029dc55f061112",
+    "FATAL-02b.musicxml": "2be894560ed67c950b213bcce4b092a7c8849597e5f7e4f88e6b10d591b9bc3b",
+    "Fatal02bDorico.png": "db775a2823eeb5954fee36ce1e60698f7636f6e8e379eefc583126197e2b5a14"
+  }
+}

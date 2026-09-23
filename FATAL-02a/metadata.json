@@ -1,7 +1,7 @@
 {
   "id": "FATAL-02a",
   "title": "Full-measure mixed-duration tuplet",
-  "status": "awaiting-source-files",
+  "status": "complete",
   "source_file": "FATAL-02a.musx",
   "export_file": "FATAL-02a.musicxml",
   "derived_from": "../FATAL-02/FATAL-02.musx",
@@ -32,7 +32,36 @@
     "expected_underflow": 0
   },
   "comparison_test": "../FATAL-02",
-  "xml_observation": null,
-  "classification": null,
-  "dorico_result": null
+  "xml_observation": {
+    "xml_well_formed": true,
+    "divisions": 6,
+    "time_signature": "4/4",
+    "expected_measure_duration": 24,
+    "actual_measure_extent": 24,
+    "underflow": 0,
+    "overflow": 0,
+    "note_durations": [
+      4,
+      4,
+      16
+    ]
+  },
+  "classification": {
+    "validator_findings": 0,
+    "fatal": false,
+    "conclusion": "A mixed-duration 3:2 tuplet imports correctly when the measure timeline is complete."
+  },
+  "dorico_result": {
+    "application": "Dorico",
+    "version": "6.2.30",
+    "import_completed": true,
+    "data_loss": false,
+    "result": "All three tuplet notes and measures 3 and 4 are preserved.",
+    "evidence_file": "Fatal02aDorico.png"
+  },
+  "sha256": {
+    "FATAL-02a.musx": "f0aca4d420057b095093839e28d7b9c757f0baffd9cbad05d8217a0daa9315fa",
+    "FATAL-02a.musicxml": "5a8e6a7f0265b0fbe77f38ed344865bb869dca552c4a3223ca27b9d1db3a45bf",
+    "Fatal02aDorico.png": "dea88ef44d16806490ad4b885f836dbc5a444dcac7676419b28cedbd1aa57219"
+  }
 }

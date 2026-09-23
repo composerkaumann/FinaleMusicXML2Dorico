@@ -53,6 +53,9 @@ Praegu rakendatud reegel:
 - \`FMD003\` — tupletit sisaldava tavapärase takti ajajoon lõpeb enne
   deklareeritud taktikestust (\`fatal\`; FATAL-02 põhjustas Doricos
   eksporditud noodi kadumise).
+- \`FMD004\` — tupletit ja pause sisaldava takti ajajoon ületab
+  deklareeritud taktikestuse (\`fatal\`; FATAL-02b põhjustas Doricos
+  eksporditud noodi kadumise).
 
 ## Testide järjekord
 
@@ -63,11 +66,13 @@ Praegu rakendatud reegel:
 3. \`FATAL-02\` — tuplet timeline mismatch; kinnitatud \`fatal\`, sest
    Dorico 6.2.30 kaotas XML-is oleva C4 poolnoodi ja lisas pausid
 4. \`FATAL-02a\` — sama segakestustega 3:2 triolett täpselt täidetud
-   4/4 taktis; eristab alatäidetud ajajoone mõju
-5. \`FATAL-03\` — tuplet start/stop voice mismatch
-6. \`FATAL-04\` — Finale Voice 2 + tuplet
-7. \`FATAL-05\` — cross-staff tuplet / missing or ambiguous voice
-8. \`FATAL-06\` — illegal MusicXML duration
-9. \`FATAL-07\` — Human Playback hidden-note rhythmic residue
+   4/4 taktis; Dorico importis selle korrektselt
+5. \`FATAL-02b\` — Finale Fill with Rests lisab tegelikust vabast
+   ruumist pikema poolpausi; kinnitatud \`fatal\`
+6. \`FATAL-03\` — tuplet start/stop voice mismatch
+7. \`FATAL-04\` — Finale Voice 2 + tuplet
+8. \`FATAL-05\` — cross-staff tuplet / missing or ambiguous voice
+9. \`FATAL-06\` — illegal MusicXML duration
+10. \`FATAL-07\` — Human Playback hidden-note rhythmic residue
 
 Teste tehakse rangelt selles järjekorras.

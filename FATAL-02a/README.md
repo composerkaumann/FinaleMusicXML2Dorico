@@ -32,5 +32,12 @@ Eeldatava divisions=6 korral peaks XML-i kestus olema
 
 ## Dorico tulemus
 
-Ootel.
+Dorico 6.2.30 import õnnestus:
 
+- kõik kolm triolettnooti säilisid;
+- takti 2 ajajoon on täpselt 24/24 division’it;
+- taktid 3 ja 4 säilisid;
+- validaator ei anna leide.
+
+Järeldus: segakestustega 3:2 triolett ei ole iseenesest fataalne. FATAL-02
+noodikadu sõltub vigasest takti ajajoonest.

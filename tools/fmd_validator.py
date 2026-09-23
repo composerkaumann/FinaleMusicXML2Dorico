@@ -110,6 +110,12 @@ def measure_contains_tuplet(measure: ET.Element) -> bool:
     return any(local_name(item.tag) == "tuplet" for item in measure.iter())
 
 
+def measure_contains_rest(measure: ET.Element) -> bool:
+    return any(
+        local_name(item.tag) == "rest" for item in measure.iter()
+    )
+
+
 def validate(path: Path) -> list[Finding]:
     root = ET.fromstring(musicxml_bytes(path))
     if local_name(root.tag) != "score-partwise":
@@ -159,14 +165,27 @@ def validate(path: Path) -> list[Finding]:
             )
             if actual > expected:
                 overflow = actual - expected
+                fatal_rest_fill = (
+                    measure_contains_tuplet(measure)
+                    and measure_contains_rest(measure)
+                )
                 findings.append(
                     Finding(
-                        rule_id="FMD001",
-                        severity="warning",
+                        rule_id="FMD004" if fatal_rest_fill else "FMD001",
+                        severity="fatal" if fatal_rest_fill else "warning",
                         message=(
-                            f"Measure {measure_number} in part "
-                            f"{part_id} extends to {actual} divisions; "
-                            f"expected at most {expected}."
+                            (
+                                f"Measure {measure_number} in part "
+                                f"{part_id} contains a tuplet and rests "
+                                f"but extends to {actual} divisions; "
+                                f"expected at most {expected}."
+                            )
+                            if fatal_rest_fill
+                            else (
+                                f"Measure {measure_number} in part "
+                                f"{part_id} extends to {actual} divisions; "
+                                f"expected at most {expected}."
+                            )
                         ),
                         part_id=part_id,
                         measure=measure_number,
