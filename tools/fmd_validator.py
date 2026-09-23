@@ -26,6 +26,30 @@ class Finding:
     divisions: int
     observed_extents: dict[str, int] | None = None
     underflow: int | None = None
+    voice: str | None = None
+    tuplet_number: str | None = None
+
+
+@dataclass
+class ActiveTuplet:
+    expected_duration: Fraction | None
+    actual_duration: int = 0
+    nested: bool = False
+
+
+NOTE_TYPE_QUARTERS = {
+    "whole": Fraction(4),
+    "half": Fraction(2),
+    "quarter": Fraction(1),
+    "eighth": Fraction(1, 2),
+    "16th": Fraction(1, 4),
+    "32nd": Fraction(1, 8),
+    "64th": Fraction(1, 16),
+    "128th": Fraction(1, 32),
+    "256th": Fraction(1, 64),
+    "512th": Fraction(1, 128),
+    "1024th": Fraction(1, 256),
+}
 
 
 def local_name(tag: str) -> str:
@@ -116,6 +140,110 @@ def measure_contains_rest(measure: ET.Element) -> bool:
     )
 
 
+def tuplet_group_findings(
+    measure: ET.Element, part_id: str, divisions: int
+) -> list[Finding]:
+    """Find complete, non-nested tuplets shorter than their explicit span."""
+
+    findings: list[Finding] = []
+    active: dict[tuple[str, str], ActiveTuplet] = {}
+
+    for note in (item for item in measure if local_name(item.tag) == "note"):
+        voice = child_text(note, "voice") or "1"
+        notations = child(note, "notations")
+        markers = (
+            [
+                item
+                for item in notations
+                if local_name(item.tag) == "tuplet"
+            ]
+            if notations is not None
+            else []
+        )
+
+        for marker in markers:
+            if marker.get("type") != "start":
+                continue
+            key = (voice, marker.get("number", "1"))
+            modification = child(note, "time-modification")
+            normal_type = (
+                child_text(modification, "normal-type")
+                if modification is not None
+                else None
+            )
+            normal_notes_text = (
+                child_text(modification, "normal-notes")
+                if modification is not None
+                else None
+            )
+            expected: Fraction | None = None
+            if normal_type in NOTE_TYPE_QUARTERS and normal_notes_text:
+                normal_notes = int(normal_notes_text)
+                normal_dots = sum(
+                    local_name(item.tag) == "normal-dot"
+                    for item in modification
+                )
+                if normal_notes > 0:
+                    dotted_multiplier = 2 - Fraction(1, 2**normal_dots)
+                    expected = (
+                        divisions
+                        * NOTE_TYPE_QUARTERS[normal_type]
+                        * normal_notes
+                        * dotted_multiplier
+                    )
+            active[key] = ActiveTuplet(expected_duration=expected)
+            same_voice = [
+                state for (item_voice, _), state in active.items()
+                if item_voice == voice
+            ]
+            if len(same_voice) > 1:
+                for state in same_voice:
+                    state.nested = True
+
+        if child(note, "chord") is None and child(note, "grace") is None:
+            for (item_voice, _), state in active.items():
+                if item_voice == voice:
+                    state.actual_duration += duration_value(note)
+
+        for marker in markers:
+            if marker.get("type") != "stop":
+                continue
+            number = marker.get("number", "1")
+            state = active.pop((voice, number), None)
+            if (
+                state is None
+                or state.nested
+                or state.expected_duration is None
+                or state.expected_duration.denominator != 1
+                or state.actual_duration >= state.expected_duration
+            ):
+                continue
+            expected = state.expected_duration.numerator
+            findings.append(
+                Finding(
+                    rule_id="FMD005",
+                    severity="warning",
+                    message=(
+                        f"Tuplet {number} in voice {voice} of measure "
+                        f"{measure.get('number', '')}, part {part_id}, "
+                        f"declares a span of {expected} divisions but "
+                        f"its notes cover only {state.actual_duration}."
+                    ),
+                    part_id=part_id,
+                    measure=measure.get("number", ""),
+                    expected_duration=expected,
+                    actual_duration=state.actual_duration,
+                    overflow=0,
+                    divisions=divisions,
+                    underflow=expected - state.actual_duration,
+                    voice=voice,
+                    tuplet_number=number,
+                )
+            )
+
+    return findings
+
+
 def validate(path: Path) -> list[Finding]:
     root = ET.fromstring(musicxml_bytes(path))
     if local_name(root.tag) != "score-partwise":
@@ -163,6 +291,7 @@ def validate(path: Path) -> list[Finding]:
                     divisions,
                 )
             )
+            findings.extend(tuplet_group_findings(measure, part_id, divisions))
             if actual > expected:
                 overflow = actual - expected
                 fatal_rest_fill = (

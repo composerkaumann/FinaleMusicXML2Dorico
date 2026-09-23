@@ -1,7 +1,7 @@
 {
   "id": "FATAL-04b",
   "title": "Voice 1 quarter-note triplet with simultaneous ordinary Voice 2 half note",
-  "status": "awaiting-source-files",
+  "status": "complete",
   "source_file": "FATAL-04b.musx",
   "export_file": "FATAL-04b.musicxml",
   "derived_from": "../FATAL-04a/FATAL-04a.musx",
@@ -26,7 +26,44 @@
     "tuplet start/stop in Voice 1",
     "comparison with FATAL-04a"
   ],
-  "xml_observation": null,
-  "classification": null,
-  "dorico_result": null
+  "xml_observation": {
+    "xml_well_formed": true,
+    "divisions": 6,
+    "time_signature": "4/4",
+    "expected_measure_duration": 24,
+    "voice_1_note_durations": [12, 4, 4, 4],
+    "voice_1_extent": 24,
+    "voice_2_note_durations": [12],
+    "voice_2_start_offset": 12,
+    "voice_2_extent": 24,
+    "tuplet_start_voice": "1",
+    "tuplet_stop_voice": "1",
+    "tuplet_note_type": "quarter",
+    "tuplet_normal_type_explicit": false,
+    "tuplet_ratio": "3:2",
+    "control_comparison": "FATAL-04b XML differs from FATAL-04a only by omission of three normal-type half elements",
+    "control_measures_1_3_4_match_base_rhythm": true,
+    "validator_findings": 0
+  },
+  "classification": {
+    "severity": "none",
+    "fatal": false,
+    "conclusion": "The correct Voice 1 triplet with a simultaneous Voice 2 half note imports without an error."
+  },
+  "dorico_result": {
+    "application": "Dorico",
+    "version": "6.2.30",
+    "import_completed": true,
+    "initial_downstem_voice_rest_added": true,
+    "initial_rest_expected": true,
+    "hidden_time_signature_reported": false,
+    "extra_beats_reported": false,
+    "data_loss_reported": false,
+    "evidence_file": null
+  },
+  "source_export_parity_note": "The MUSX file was saved after the analyzed MusicXML export; exact source/export state parity is not established by timestamps.",
+  "sha256": {
+    "FATAL-04b.musx": "8be552e16203fa2cabb65347ffb0996c4d3cff1ff52531037a386f52b44e50f6",
+    "FATAL-04b.musicxml": "20fcde643e6de432cdfe78c2a9abda8de67cf01d24fa6ed15395625325fb366a"
+  }
 }

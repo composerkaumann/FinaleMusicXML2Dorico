@@ -7,7 +7,7 @@ veerandnooditriolett koos samal ajal Voice 2-s oleva tavalise poolnoodiga
 impordib Doricosse korrektselt. See on FATAL-04a kontrollkatse: ainus
 plaanitud erinevus on trioleti definitsiooni noodiväärtus.
 
-`FATAL` on testiseeria tunnus; vea olemasolu ja raskusaste on ootel.
+`FATAL` on testiseeria tunnus; see kontrollfail impordib korrektselt.
 
 ## Finale'is tegemine
 
@@ -35,7 +35,28 @@ kirjelda tegelikku tulemust; ära paranda seda märkamatult ümber.
 
 ## Dorico tulemus
 
-Ootel.
+Dorico 6.2.30 import õnnestus. Kasutaja sõnul lisab Dorico takti
+algusse downstem voice'i pausi; see on Voice 2 hilisema alguse
+ootuspärane esitus, mitte viga. 04a-s nähtud löökide lisandumist
+ega peidetud taktimõõtu ei täheldatud.
+
+## XML-i tulemus
+
+- `divisions` on 6 ja 4/4 takti kestus 24 division'it;
+- Voice 1 C4 poolnoot kestab 12 ning kolm G4 triolettveerandnooti
+  kestavad 4 + 4 + 4; ajajoon lõpeb 24 juures;
+- Voice 2 E4 poolnoot algab offset'il 12 ja lõpeb 24 juures;
+- kõigil kolmel G4 noodil on 3:2 `time-modification`, kuid puudub
+  `normal-type`; see sobib nende `quarter`-noodiväärtusega;
+- XML erineb FATAL-04a-st täpselt kolme
+  `<normal-type>half</normal-type>` elemendi puudumise poolest;
+- taktid 1, 3 ja 4 vastavad BASE-failile pärast `divisions`-ühikute
+  ühtlustamist;
+- validaator ei anna leide.
+
+Järeldus: Voice 1 korrektne veerandnooditriolett ja sellega samaaegne
+Voice 2 poolnoot ei põhjusta Doricos viga. Voice 2 alguspausi ei tohi
+liigitada lisatud löögiks.
 
 ## Allikad
 

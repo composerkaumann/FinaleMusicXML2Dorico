@@ -60,12 +60,13 @@ jäta tulemus muutmata ja kirjelda seda koos ekspordiga.
   vastuolu, mitte üle- või alatäidetud MusicXML-i ajajoon.
 - XML-is puudub taktis 2 taktimõõdumuutus. Taktid 1, 3 ja 4 vastavad
   BASE-failile pärast `divisions`-ühikute ühtlustamist.
-- Praegune validaator annab null leidu, sest ta ei võrdle veel
-  tupletigrupi määratletud ulatust ja gruppi kuuluvate nootide kestust.
+- Validaatori `FMD005` annab ühe `warning`-leiu: tupletigrupi
+  määratletud ulatus on 24 division'it, gruppi kuuluvad noodid
+  katavad 12 division'it.
 
-Uue warning-reegli täpne tingimus otsustatakse pärast FATAL-04b
-kontrollkatset, et vältida korrektsete segakestustega triolettide
-valepositiivseid leide.
+FATAL-04b kontrollfail erineb XML-is ainult kolme `normal-type`
+`half`-elemendi puudumise poolest. Sellega on eraldatud vale
+trioletidefinitsiooni mõju Voice 2 poolnoodi olemasolust.
 
 ## Dorico tulemus
 

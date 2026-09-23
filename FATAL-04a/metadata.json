@@ -43,14 +43,15 @@
     "declared_tuplet_group_span": 24,
     "time_signature_change_in_xml_measure_2": false,
     "control_measures_1_3_4_match_base_rhythm": true,
-    "validator_findings": 0
+    "validator_findings": 1,
+    "control_comparison": "FATAL-04b XML differs only by omission of three normal-type half elements"
   },
   "classification": {
     "severity": "warning",
     "category": "tuplet-definition-span-mismatch",
     "fatal": false,
-    "rule_id": null,
-    "rule_status": "pending-FATAL-04b-control"
+    "rule_id": "FMD005",
+    "rule_status": "implemented"
   },
   "dorico_result": {
     "application": "Dorico",

@@ -1,5 +1,6 @@
 from pathlib import Path
 import sys
+import tempfile
 import unittest
 
 
@@ -89,6 +90,39 @@ class MeasureDurationTests(unittest.TestCase):
             validate(ROOT / "FATAL-04/FATAL-04.musicxml"),
             [],
         )
+
+    def test_fatal_04a_warns_for_incomplete_half_note_tuplet_span(self) -> None:
+        findings = validate(ROOT / "FATAL-04a/FATAL-04a.musicxml")
+
+        self.assertEqual(len(findings), 1)
+        finding = findings[0]
+        self.assertEqual(finding.rule_id, "FMD005")
+        self.assertEqual(finding.severity, "warning")
+        self.assertEqual(finding.part_id, "P1")
+        self.assertEqual(finding.measure, "2")
+        self.assertEqual(finding.voice, "1")
+        self.assertEqual(finding.tuplet_number, "1")
+        self.assertEqual(finding.expected_duration, 24)
+        self.assertEqual(finding.actual_duration, 12)
+        self.assertEqual(finding.underflow, 12)
+
+    def test_fatal_04b_correct_tuplet_definition_has_no_findings(self) -> None:
+        self.assertEqual(
+            validate(ROOT / "FATAL-04b/FATAL-04b.musicxml"),
+            [],
+        )
+
+    def test_explicit_matching_normal_type_has_no_findings(self) -> None:
+        source = (ROOT / "FATAL-04a/FATAL-04a.musicxml").read_text()
+        self.assertEqual(source.count("<normal-type>half</normal-type>"), 3)
+        corrected = source.replace(
+            "<normal-type>half</normal-type>",
+            "<normal-type>quarter</normal-type>",
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "matching-normal-type.musicxml"
+            path.write_text(corrected)
+            self.assertEqual(validate(path), [])
 
 
 if __name__ == "__main__":

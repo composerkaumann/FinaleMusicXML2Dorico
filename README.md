@@ -56,6 +56,9 @@ Praegu rakendatud reegel:
 - \`FMD004\` — tupletit ja pause sisaldava takti ajajoon ületab
   deklareeritud taktikestuse (\`fatal\`; FATAL-02b põhjustas Doricos
   eksporditud noodi kadumise).
+- \`FMD005\` — ühe takti sees lõppeva, selgesõnalise
+  \`normal-type\`-iga trioleti noodid katavad määratletust lühema
+  ajavahemiku (\`warning\`; FATAL-04a põhjustas Doricos lisalööke).
 
 ## Testide järjekord
 
@@ -80,7 +83,8 @@ Praegu rakendatud reegel:
    kinnitatud \`warning\`: Dorico lisas takti lööke ja peidetud
    taktimõõdu, kuid import ei katkenud
 9. \`FATAL-04b\` — sama kahe hääle materjal, kuid korrektne
-   veerandnooditrioleti definitsioon; kontrollkatse, tulemus ootel
+   veerandnooditrioleti definitsioon; Dorico import korras, Voice 2
+   alguspaus on ootuspärane
 10. \`FATAL-05\` — cross-staff tuplet / missing or ambiguous voice
 11. \`FATAL-06\` — illegal MusicXML duration
 12. \`FATAL-07\` — Human Playback hidden-note rhythmic residue
