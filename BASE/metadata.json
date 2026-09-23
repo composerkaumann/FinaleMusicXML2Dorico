@@ -1,0 +1,53 @@
+{
+  "id": "FMD-BASE",
+  "role": "reference",
+  "source_file": "FMD-BASE.musx",
+  "export_file": "FMD-BASE.musicxml",
+  "source_application": {
+    "name": "Finale",
+    "version": "27.4",
+    "platform": "Mac"
+  },
+  "musicxml": {
+    "version": "4.0",
+    "document_type": "score-partwise",
+    "compressed": false,
+    "parts": 1,
+    "measures": 4,
+    "divisions": 2,
+    "time_signature": "4/4",
+    "expected_measure_duration": 8
+  },
+  "measures": {
+    "1": {
+      "role": "control",
+      "voice_duration_sum": 8,
+      "content": "C4 quarter x4"
+    },
+    "2": {
+      "role": "test_location",
+      "voice_duration_sum": 8,
+      "content": "whole-measure rest",
+      "rest_measure": true
+    },
+    "3": {
+      "role": "control",
+      "voice_duration_sum": 8,
+      "content": "G4 F4 E4 D4 quarters"
+    },
+    "4": {
+      "role": "control",
+      "voice_duration_sum": 8,
+      "content": "C4 E4 G4 C5 eighths; G4 half"
+    }
+  },
+  "sha256": {
+    "FMD-BASE.musx": "ebceaf08b9e31f9e37d8dc6f073b0a73d2551c4af2494e848cf6eeb809d9b0e7",
+    "FMD-BASE.musicxml": "15fe70bcb1c471c84eba8f800e59c5d0c56222bc6f0bce8cf3c8affca0abc05e"
+  },
+  "baseline_validation": {
+    "xml_well_formed": true,
+    "all_measure_duration_sums_match": true,
+    "dorico_result": null
+  }
+}
