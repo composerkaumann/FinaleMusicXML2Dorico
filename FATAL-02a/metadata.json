@@ -1,0 +1,38 @@
+{
+  "id": "FATAL-02a",
+  "title": "Full-measure mixed-duration tuplet",
+  "status": "awaiting-source-files",
+  "source_file": "FATAL-02a.musx",
+  "export_file": "FATAL-02a.musicxml",
+  "derived_from": "../FATAL-02/FATAL-02.musx",
+  "test_location": {
+    "part_id": "P1",
+    "measure": "2",
+    "voice": "1"
+  },
+  "planned_finale_content": {
+    "tuplet_ratio": "3:2",
+    "tuplet_unit": "quarter",
+    "member_types": [
+      "quarter",
+      "quarter",
+      "whole"
+    ],
+    "rests_added": false
+  },
+  "expected_musicxml": {
+    "divisions": 6,
+    "expected_measure_duration": 24,
+    "expected_note_durations": [
+      4,
+      4,
+      16
+    ],
+    "expected_measure_extent": 24,
+    "expected_underflow": 0
+  },
+  "comparison_test": "../FATAL-02",
+  "xml_observation": null,
+  "classification": null,
+  "dorico_result": null
+}

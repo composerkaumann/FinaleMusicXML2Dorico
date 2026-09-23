@@ -25,6 +25,7 @@ class Finding:
     overflow: int
     divisions: int
     observed_extents: dict[str, int] | None = None
+    underflow: int | None = None
 
 
 def local_name(tag: str) -> str:
@@ -105,6 +106,10 @@ def measure_extent(measure: ET.Element) -> int:
     return furthest
 
 
+def measure_contains_tuplet(measure: ET.Element) -> bool:
+    return any(local_name(item.tag) == "tuplet" for item in measure.iter())
+
+
 def validate(path: Path) -> list[Finding]:
     root = ET.fromstring(musicxml_bytes(path))
     if local_name(root.tag) != "score-partwise":
@@ -169,6 +174,30 @@ def validate(path: Path) -> list[Finding]:
                         actual_duration=actual,
                         overflow=overflow,
                         divisions=divisions,
+                    )
+                )
+            elif (
+                actual < expected
+                and measure.get("implicit") != "yes"
+                and measure_contains_tuplet(measure)
+            ):
+                underflow = expected - actual
+                findings.append(
+                    Finding(
+                        rule_id="FMD003",
+                        severity="fatal",
+                        message=(
+                            f"Measure {measure_number} in part {part_id} "
+                            f"contains a tuplet but reaches only {actual} "
+                            f"of {expected} divisions."
+                        ),
+                        part_id=part_id,
+                        measure=measure_number,
+                        expected_duration=expected,
+                        actual_duration=actual,
+                        overflow=0,
+                        divisions=divisions,
+                        underflow=underflow,
                     )
                 )
 

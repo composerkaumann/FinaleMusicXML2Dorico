@@ -42,5 +42,22 @@ eraldi struktuuridena.
 
 ## Dorico tulemus
 
-Ootel.
+Dorico 6.2.30 import lõpeb, kuid tulemus on fataalselt vigane:
 
+- XML-i esimene ja teine C4 säilivad;
+- XML-is olev kolmas C4 poolnoot kaob;
+- Dorico lisab puuduva aja asemele pause.
+
+Tulemus on jäädvustatud failis FATAL-02exportresult.png.
+
+## Klassifikatsioon
+
+- reegel: FMD003
+- raskusaste: fatal
+- kategooria: tuplet-timeline
+- tuvastus: tupletit sisaldava mitte-implicit takti tegelik ajajoon lõpeb
+  enne aktiivse taktimõõdu kestust
+
+Selles failis on oodatav kestus 24 ja tegelik kestus 16 division’it.
+Puudujääk on 8 division’it. Fataalsuse põhjus on kinnitatud noodikadu,
+mitte üksnes see, et Dorico lisab puuduvad pausid.

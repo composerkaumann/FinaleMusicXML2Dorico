@@ -50,6 +50,9 @@ Praegu rakendatud reegel:
   (\`warning\`; Dorico 6.2.30 taastus ühe partii FATAL-01 testist).
 - \`FMD002\` — sama takti tegelik rütmiline ulatus erineb partiide vahel
   hoolimata samast deklareeritud taktikestusest (\`warning\`).
+- \`FMD003\` — tupletit sisaldava tavapärase takti ajajoon lõpeb enne
+  deklareeritud taktikestust (\`fatal\`; FATAL-02 põhjustas Doricos
+  eksporditud noodi kadumise).
 
 ## Testide järjekord
 
@@ -57,11 +60,14 @@ Praegu rakendatud reegel:
    6.2.30 taastus peidetud lokaalse taktimõõdumuutusega
 2. \`FATAL-01a\` — conflicting measure durations between two parts;
    Dorico 6.2.30 täitis lühema partii veerandpausiga
-3. \`FATAL-02\` — tuplet timeline mismatch
-4. \`FATAL-03\` — tuplet start/stop voice mismatch
-5. \`FATAL-04\` — Finale Voice 2 + tuplet
-6. \`FATAL-05\` — cross-staff tuplet / missing or ambiguous voice
-7. \`FATAL-06\` — illegal MusicXML duration
-8. \`FATAL-07\` — Human Playback hidden-note rhythmic residue
+3. \`FATAL-02\` — tuplet timeline mismatch; kinnitatud \`fatal\`, sest
+   Dorico 6.2.30 kaotas XML-is oleva C4 poolnoodi ja lisas pausid
+4. \`FATAL-02a\` — sama segakestustega 3:2 triolett täpselt täidetud
+   4/4 taktis; eristab alatäidetud ajajoone mõju
+5. \`FATAL-03\` — tuplet start/stop voice mismatch
+6. \`FATAL-04\` — Finale Voice 2 + tuplet
+7. \`FATAL-05\` — cross-staff tuplet / missing or ambiguous voice
+8. \`FATAL-06\` — illegal MusicXML duration
+9. \`FATAL-07\` — Human Playback hidden-note rhythmic residue
 
 Teste tehakse rangelt selles järjekorras.

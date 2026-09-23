@@ -39,6 +39,19 @@ class MeasureDurationTests(unittest.TestCase):
         self.assertEqual(mismatch.overflow, 2)
         self.assertEqual(mismatch.observed_extents, {"P1": 10, "P2": 8})
 
+    def test_fatal_02_detects_incomplete_tuplet_measure(self) -> None:
+        findings = validate(ROOT / "FATAL-02/FATAL-02.musicxml")
+
+        self.assertEqual(len(findings), 1)
+        finding = findings[0]
+        self.assertEqual(finding.rule_id, "FMD003")
+        self.assertEqual(finding.severity, "fatal")
+        self.assertEqual(finding.part_id, "P1")
+        self.assertEqual(finding.measure, "2")
+        self.assertEqual(finding.expected_duration, 24)
+        self.assertEqual(finding.actual_duration, 16)
+        self.assertEqual(finding.underflow, 8)
+
 
 if __name__ == "__main__":
     unittest.main()

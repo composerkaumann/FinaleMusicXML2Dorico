@@ -1,7 +1,7 @@
 {
   "id": "FATAL-02",
   "title": "Tuplet timeline mismatch",
-  "status": "awaiting-source-files",
+  "status": "complete",
   "source_file": "FATAL-02.musx",
   "export_file": "FATAL-02.musicxml",
   "derived_from": "../BASE/FMD-BASE.musx",
@@ -29,7 +29,58 @@
       "hidden notes"
     ]
   },
-  "xml_observation": null,
-  "classification": null,
-  "dorico_result": null
+  "finale_export": {
+    "warning_observed": null
+  },
+  "xml_observation": {
+    "xml_well_formed": true,
+    "divisions": 6,
+    "time_signature": "4/4",
+    "expected_measure_duration": 24,
+    "actual_measure_extent": 16,
+    "underflow": 8,
+    "notes": [
+      {
+        "pitch": "C4",
+        "type": "quarter",
+        "duration": 4,
+        "time_modification": "3:2",
+        "tuplet": "start"
+      },
+      {
+        "pitch": "C4",
+        "type": "quarter",
+        "duration": 4,
+        "time_modification": "3:2"
+      },
+      {
+        "pitch": "C4",
+        "type": "half",
+        "duration": 8,
+        "time_modification": "3:2",
+        "tuplet": "stop"
+      }
+    ]
+  },
+  "classification": {
+    "rule_id": "FMD003",
+    "severity": "fatal",
+    "category": "tuplet-timeline",
+    "summary": "A tuplet-bearing explicit measure ends before its declared duration.",
+    "fatal_effect": "Dorico drops an exported pitched note and replaces missing time with rests."
+  },
+  "dorico_result": {
+    "application": "Dorico",
+    "version": "6.2.30",
+    "import_completed": true,
+    "data_loss": true,
+    "result": "Only the first two C notes remain visible. The exported C4 half note is lost and Dorico inserts rests.",
+    "evidence_file": "FATAL-02exportresult.png",
+    "classification_confirmed_by_user": true
+  },
+  "sha256": {
+    "FATAL-02.musx": "eeaab0517d3e664b80aef922b75d774f4aa6a6263b0223f26b61bab57e59cc5c",
+    "FATAL-02.musicxml": "29380c9249fe40a5a132014827f3e84ce872e213a5e18b5a94089fe92188a060",
+    "FATAL-02exportresult.png": "2b953351b83d0cf03e75c24ac66ef86ae413980be9c73e8ecdb789919eadce08"
+  }
 }
