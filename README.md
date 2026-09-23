@@ -34,15 +34,31 @@ pärast testfailide valmimist.
 Baasi detailne masinloetav kirjeldus ja kontrollsummad asuvad failis
 \`BASE/metadata.json\`.
 
+## Validaatori käivitamine
+
+\`\`\`sh
+python3 tools/fmd_validator.py BASE/FMD-BASE.musicxml
+python3 tools/fmd_validator.py FATAL-01/FATAL-01.musicxml
+\`\`\`
+
+Masinloetava tulemuse saamiseks lisa \`--json\`. Validaator tagastab
+leidude korral väljumiskoodi 1 ja sisendvea korral väljumiskoodi 2.
+
+Praegu rakendatud reegel:
+
+- \`FMD001\` — takti rütmiline ajajoon ületab aktiivse taktimõõdu kestust
+  (\`warning\`; Dorico 6.2.30 taastus ühe partii FATAL-01 testist).
+
 ## Testide järjekord
 
-1. \`FATAL-01\` — measure duration mismatch / overfilled measure
-2. \`FATAL-02\` — tuplet timeline mismatch
-3. \`FATAL-03\` — tuplet start/stop voice mismatch
-4. \`FATAL-04\` — Finale Voice 2 + tuplet
-5. \`FATAL-05\` — cross-staff tuplet / missing or ambiguous voice
-6. \`FATAL-06\` — illegal MusicXML duration
-7. \`FATAL-07\` — Human Playback hidden-note rhythmic residue
+1. \`FATAL-01\` — measure duration mismatch / overfilled measure; Dorico
+   6.2.30 taastus peidetud lokaalse taktimõõdumuutusega
+2. \`FATAL-01a\` — conflicting measure durations between two parts
+3. \`FATAL-02\` — tuplet timeline mismatch
+4. \`FATAL-03\` — tuplet start/stop voice mismatch
+5. \`FATAL-04\` — Finale Voice 2 + tuplet
+6. \`FATAL-05\` — cross-staff tuplet / missing or ambiguous voice
+7. \`FATAL-06\` — illegal MusicXML duration
+8. \`FATAL-07\` — Human Playback hidden-note rhythmic residue
 
 Teste tehakse rangelt selles järjekorras.
-

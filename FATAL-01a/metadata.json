@@ -1,0 +1,24 @@
+{
+  "id": "FATAL-01a",
+  "title": "Conflicting measure durations between parts",
+  "status": "awaiting-source-files",
+  "source_file": "FATAL-01a.musx",
+  "export_file": "FATAL-01a.musicxml",
+  "derived_from": "../BASE/FMD-BASE.musx",
+  "test_location": {
+    "measure": "2",
+    "parts": {
+      "P1": {
+        "expected_extent": 8,
+        "planned_content": "valid 4/4 content"
+      },
+      "P2": {
+        "expected_extent": 10,
+        "planned_content": "C4 quarter x3; C4 half"
+      }
+    }
+  },
+  "hypothesis": "Part-local recovery may fail or alter alignment when simultaneous parts disagree about measure duration.",
+  "dorico_result": null
+}
+
