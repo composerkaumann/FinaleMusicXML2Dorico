@@ -1,7 +1,7 @@
 {
   "id": "FATAL-04a",
   "title": "Voice 1 quarter-note triplet with half-note tuplet definition and Voice 2 half note",
-  "status": "awaiting-source-files",
+  "status": "complete",
   "source_file": "FATAL-04a.musx",
   "export_file": "FATAL-04a.musicxml",
   "derived_from": "../BASE/FMD-BASE.musx",
@@ -24,7 +24,48 @@
     "note types and time-modification",
     "tuplet display types and start/stop"
   ],
-  "xml_observation": null,
-  "classification": null,
-  "dorico_result": null
+  "xml_observation": {
+    "xml_well_formed": true,
+    "divisions": 6,
+    "time_signature": "4/4",
+    "expected_measure_duration": 24,
+    "voice_1_note_durations": [12, 4, 4, 4],
+    "voice_1_extent": 24,
+    "voice_2_note_durations": [12],
+    "voice_2_start_offset": 12,
+    "voice_2_extent": 24,
+    "tuplet_start_voice": "1",
+    "tuplet_stop_voice": "1",
+    "tuplet_note_type": "quarter",
+    "tuplet_normal_type": "half",
+    "tuplet_ratio": "3:2",
+    "tuplet_group_note_duration": 12,
+    "declared_tuplet_group_span": 24,
+    "time_signature_change_in_xml_measure_2": false,
+    "control_measures_1_3_4_match_base_rhythm": true,
+    "validator_findings": 0
+  },
+  "classification": {
+    "severity": "warning",
+    "category": "tuplet-definition-span-mismatch",
+    "fatal": false,
+    "rule_id": null,
+    "rule_status": "pending-FATAL-04b-control"
+  },
+  "dorico_result": {
+    "application": "Dorico",
+    "version": "6.2.30",
+    "import_completed": true,
+    "hidden_time_signature_reported": true,
+    "extra_beats_reported": true,
+    "added_rests_visible": true,
+    "later_measures_intact": true,
+    "evidence_file": "FATAL-04aDorico.png"
+  },
+  "source_export_parity_note": "The MUSX file was saved after the analyzed MusicXML export; exact source/export state parity is not established by timestamps.",
+  "sha256": {
+    "FATAL-04a.musx": "d8da0c9c0d0b86efe59803ac24037165edd2427f008721eaa43839d2ff6a53e6",
+    "FATAL-04a.musicxml": "a67d0c9d700617d8d2582b2708bfda8282696ce68367f039a905bd6b52db14b0",
+    "FATAL-04aDorico.png": "fcc81afbb5dfdb156a6cb24de4c3e6cd106544df2e1a2dbf337a1451b6e81ad8"
+  }
 }

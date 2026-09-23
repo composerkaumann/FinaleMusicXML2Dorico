@@ -77,7 +77,8 @@ Praegu rakendatud reegel:
    validaatoril leide pole
 8. \`FATAL-04a\` — Voice 1 teises taktiosas triolettveerandnoodid ja
    samaaegne Voice 2 poolnoot; trioleti vale poolnoodidefinitsioon,
-   tulemus ootel
+   kinnitatud \`warning\`: Dorico lisas takti lööke ja peidetud
+   taktimõõdu, kuid import ei katkenud
 9. \`FATAL-04b\` — sama kahe hääle materjal, kuid korrektne
    veerandnooditrioleti definitsioon; kontrollkatse, tulemus ootel
 10. \`FATAL-05\` — cross-staff tuplet / missing or ambiguous voice

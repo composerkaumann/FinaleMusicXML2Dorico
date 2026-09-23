@@ -11,7 +11,8 @@ Suhe on mõlemal juhul 3:2, ent definitsiooni noodiväärtus erineb
 tegelikult sisestatud nootidest. Paariskatse FATAL-04b kasutab sama
 noodimaterjali ja Voice 2 poolnooti, aga õiget trioleti definitsiooni.
 Nii saab eristada valest definitsioonist tuleneva mõju kahe hääle
-koosesinemisest. Nimetuses `FATAL` on seerianumber; raskusaste on ootel.
+koosesinemisest. Nimetuses `FATAL` on seerianumber; tegelik raskusaste
+on **warning**, mitte fatal.
 
 ## Finale'is tegemine
 
@@ -44,13 +45,40 @@ jäta tulemus muutmata ja kirjelda seda koos ekspordiga.
 - häälte vaheline `backup` ning võrdlus FATAL-04b XML-iga;
 - taktid 1, 3 ja 4 võrreldes BASE-failiga.
 
-Kui XML normaliseerib selle tavaliseks korrektseks veerandnooditrioletiks,
-ei ole failis tuvastatavat definitsiooniviga. Kui tegelik ajajoon muutub,
-liigitame tulemuse ekspordi ja Dorico testi põhjal.
+## XML-i tulemus
+
+- XML on süntaktiliselt korrektne; `divisions` on 6 ja 4/4 takti
+  deklareeritud kestus 24 division'it.
+- Voice 1: C4 poolnoot kestusega 12, siis kolm G4 veerandnooti
+  kestustega 4 + 4 + 4. Seega lõpeb XML-i ajajoon täpselt 24 juures.
+- Voice 2: E4 poolnoot algab kolmandal löögil (offset 12) ja lõpeb
+  samuti 24 juures. Häälte vahel on `backup`-elemendid.
+- Kõigil kolmel G4 noodil on `time-modification` 3:2 ja
+  `normal-type` = `half`; `type` jääb `quarter`-iks. Nende tegelikud
+  kestused katavad kaks lööki, kuid poolnooditrioleti definitsioon
+  kirjeldab neljalöögilist vahemikku. See on tupletigrupi sisuline
+  vastuolu, mitte üle- või alatäidetud MusicXML-i ajajoon.
+- XML-is puudub taktis 2 taktimõõdumuutus. Taktid 1, 3 ja 4 vastavad
+  BASE-failile pärast `divisions`-ühikute ühtlustamist.
+- Praegune validaator annab null leidu, sest ta ei võrdle veel
+  tupletigrupi määratletud ulatust ja gruppi kuuluvate nootide kestust.
+
+Uue warning-reegli täpne tingimus otsustatakse pärast FATAL-04b
+kontrollkatset, et vältida korrektsete segakestustega triolettide
+valepositiivseid leide.
 
 ## Dorico tulemus
 
-Ootel.
+Dorico 6.2.30 import õnnestus, kuid kasutaja sõnul lisandus takti 2
+lööke koos peidetud taktimõõduga. Ekraanipildil on näha lisatud pause
+ja taktimõõdu signpost; taktid 3 ja 4 on olemas.
+
+Järeldus: **warning** — import ei katke, kuid takt 2 muutub. Dorico
+täpset lisatud löökide arvu ekraanipildi põhjal ei fikseerita.
+
+Tõendus: `FATAL-04aDorico.png`. Lähte-`musx` salvestati pärast
+`musicxml`-eksporti; seetõttu ei kinnita failide ajatemplid nende
+täielikku olekuühtsust. Analüüsi alus on eksporditud XML.
 
 ## Allikad
 
