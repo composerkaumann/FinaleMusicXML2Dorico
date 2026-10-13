@@ -1,0 +1,74 @@
+{
+  "id": "FATAL-05",
+  "title": "Cross-staff tuplet exported as two separate single-staff parts",
+  "status": "complete-with-validator-false-positive",
+  "source_file": "FMD-05.musx",
+  "export_file": "FMD-05.musicxml",
+  "derived_from": "../BASE/FMD-BASE-2STAFF.musx",
+  "test_location": {
+    "part_id": "P1",
+    "measure": "2",
+    "voice": "1",
+    "cross_staff_note": "middle C4 triplet note"
+  },
+  "planned_finale_content": {
+    "voice_1": "G4 C4 G4 quarter-note triplet 3:2, followed by C4 half note",
+    "cross_staff_target": "lower staff",
+    "ending_half_note_present_in_export": false,
+    "ending_half_note_absence_cause": null
+  },
+  "xml_observation": {
+    "xml_well_formed": true,
+    "parts": 2,
+    "measures_per_part": 4,
+    "divisions_by_part": {"P1": 6, "P2": 2},
+    "time_signature": "4/4",
+    "expected_measure_duration_by_part": {"P1": 24, "P2": 8},
+    "measure_2_actual_extent_by_part": {"P1": 12, "P2": 8},
+    "measure_2_actual_extent_quarter_beats_by_part": {"P1": 2, "P2": 4},
+    "P1_measure_2_pitches": ["G4", "C4", "G4"],
+    "P1_measure_2_note_durations": [4, 4, 4],
+    "tuplet_ratio": "3:2",
+    "tuplet_start_voice": "1",
+    "tuplet_stop_voice": "1",
+    "all_tuplet_notes_in_part": "P1",
+    "all_tuplet_notes_in_voice": "1",
+    "staff_elements_present": false,
+    "staves_elements_present": false,
+    "cross_staff_target_structurally_encoded": false,
+    "middle_note_stem_default_y": "-75",
+    "control_measures_1_3_4_match_two_staff_base_normalized_content": true,
+    "P2_content_matches_two_staff_base": true
+  },
+  "classification": {
+    "severity": "none",
+    "fatal": false,
+    "notation_loss_reported": true,
+    "conclusion": "The user reports a successful Dorico import with all notes on the source staff. This XML does not structurally assign any note to a second staff within a part."
+  },
+  "validator_observation": {
+    "finding_count": 1,
+    "rule_id": "FMD003",
+    "reported_severity": "fatal",
+    "expected_duration": 24,
+    "actual_duration": 12,
+    "underflow": 12,
+    "known_fatal_false_positive": true,
+    "follow_up": "Refine the underfilled-tuplet rule and distinguish the observed Dorico versions; do not infer fatality solely from measure underfill."
+  },
+  "dorico_result": {
+    "application": "Dorico",
+    "version": "6.2.31",
+    "import_completed": true,
+    "data_loss_reported": false,
+    "all_notes_on_source_staff": true,
+    "cross_staff_layout_preserved": false,
+    "evidence": "User report",
+    "evidence_file": null
+  },
+  "source_export_parity_note": "The MUSX file was saved two seconds after the analyzed MusicXML export; exact source/export state parity is not established by timestamps.",
+  "sha256": {
+    "FMD-05.musx": "36069779f4d25d6221e6205ef895e2b6f39eff2f3a5b573ed4d7ca35ec12c909",
+    "FMD-05.musicxml": "63870e44155330c09936a4392ecbc7fc504dd5f36a7b4e49808db803dce43975"
+  }
+}

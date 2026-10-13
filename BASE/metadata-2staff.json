@@ -1,0 +1,47 @@
+{
+  "id": "FMD-BASE-2STAFF",
+  "role": "two-staff-reference",
+  "source_file": "FMD-BASE-2STAFF.musx",
+  "export_file": "FMD-BASE-2STAFF.musicxml",
+  "derived_from": "FMD-BASE.musx",
+  "source_application": {
+    "name": "Finale",
+    "version_reported_in_xml": "27.4",
+    "platform": "Mac"
+  },
+  "musicxml": {
+    "version": "4.0",
+    "document_type": "score-partwise",
+    "compressed": false,
+    "parts": 2,
+    "measures_per_part": 4,
+    "divisions_by_part": {"P1": 2, "P2": 2},
+    "time_signature": "4/4",
+    "expected_measure_duration_by_part": {"P1": 8, "P2": 8},
+    "staff_elements_present": false,
+    "staves_elements_present": false,
+    "structure": "Two separate single-staff parts grouped by a bracket, rather than one multi-staff part."
+  },
+  "content": {
+    "P1": {
+      "clef": "G2",
+      "matches_original_base_pitch_and_normalized_rhythm": true,
+      "measure_2": "whole-measure rest"
+    },
+    "P2": {
+      "clef": "F4",
+      "all_measures": "whole-measure rests"
+    }
+  },
+  "baseline_validation": {
+    "xml_well_formed": true,
+    "all_measure_extents_four_quarter_beats": true,
+    "validator_findings": 0,
+    "dorico_result": null
+  },
+  "source_export_parity_note": "The MUSX file was saved 12 seconds after the analyzed MusicXML export; exact source/export state parity is not established by timestamps.",
+  "sha256": {
+    "FMD-BASE-2STAFF.musx": "5bb61c5400517b66b82a124633fdcf55dc3e8643641e8d5d4dd1cbd164b01a30",
+    "FMD-BASE-2STAFF.musicxml": "fae78d51a1a694d4242325ae2bfb0d6fb3b8e972421dd88eb05771441ab55596"
+  }
+}
