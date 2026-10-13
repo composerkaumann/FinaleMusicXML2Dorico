@@ -28,6 +28,7 @@ class Finding:
     underflow: int | None = None
     voice: str | None = None
     tuplet_number: str | None = None
+    note_index: int | None = None
 
 
 @dataclass
@@ -138,6 +139,50 @@ def measure_contains_rest(measure: ET.Element) -> bool:
     return any(
         local_name(item.tag) == "rest" for item in measure.iter()
     )
+
+
+def tiny_untyped_note_findings(
+    measure: ET.Element, part_id: str, divisions: int
+) -> list[Finding]:
+    """Warn on very short pitched notes with no notation type or tuplet ratio."""
+
+    findings: list[Finding] = []
+    notes = (item for item in measure if local_name(item.tag) == "note")
+    for index, note in enumerate(notes, start=1):
+        if (
+            child(note, "pitch") is None
+            or child(note, "grace") is not None
+            or child(note, "type") is not None
+            or child(note, "time-modification") is not None
+        ):
+            continue
+        duration = duration_value(note)
+        if (
+            duration <= 0
+            or Fraction(duration, divisions) >= NOTE_TYPE_QUARTERS["1024th"]
+        ):
+            continue
+        findings.append(
+            Finding(
+                rule_id="FMD006",
+                severity="warning",
+                message=(
+                    f"Note {index} in measure {measure.get('number', '')}, "
+                    f"part {part_id}, has no notation type or tuplet ratio "
+                    f"and lasts {duration}/{divisions} of a quarter note, "
+                    f"shorter than a 1024th note. Dorico may quantize it."
+                ),
+                part_id=part_id,
+                measure=measure.get("number", ""),
+                expected_duration=(divisions + 255) // 256,
+                actual_duration=duration,
+                overflow=0,
+                divisions=divisions,
+                voice=child_text(note, "voice") or "1",
+                note_index=index,
+            )
+        )
+    return findings
 
 
 def tuplet_group_findings(
@@ -291,6 +336,7 @@ def validate(path: Path) -> list[Finding]:
                     divisions,
                 )
             )
+            findings.extend(tiny_untyped_note_findings(measure, part_id, divisions))
             findings.extend(tuplet_group_findings(measure, part_id, divisions))
             if actual > expected:
                 overflow = actual - expected

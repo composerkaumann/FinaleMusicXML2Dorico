@@ -124,6 +124,55 @@ class MeasureDurationTests(unittest.TestCase):
             path.write_text(corrected)
             self.assertEqual(validate(path), [])
 
+    def test_fatal_06a_warns_for_tiny_untyped_note(self) -> None:
+        findings = validate(ROOT / "FATAL-06/FATAL-06a.musicxml")
+
+        self.assertEqual(len(findings), 1)
+        finding = findings[0]
+        self.assertEqual(finding.rule_id, "FMD006")
+        self.assertEqual(finding.severity, "warning")
+        self.assertEqual(finding.part_id, "P1")
+        self.assertEqual(finding.measure, "2")
+        self.assertEqual(finding.voice, "1")
+        self.assertEqual(finding.note_index, 2)
+        self.assertEqual(finding.divisions, 1024)
+        self.assertEqual(finding.expected_duration, 4)
+        self.assertEqual(finding.actual_duration, 1)
+
+    def test_fatal_06b_normalized_quarter_without_type_has_no_findings(self) -> None:
+        self.assertEqual(
+            validate(ROOT / "FATAL-06/FATAL-06b.musicxml"),
+            [],
+        )
+
+    def test_untyped_1024th_note_at_boundary_has_no_findings(self) -> None:
+        source = (ROOT / "FATAL-06/FATAL-06a.musicxml").read_text()
+        corrected = source.replace("<duration>1</duration>", "<duration>4</duration>")
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "untyped-1024th.musicxml"
+            path.write_text(corrected)
+            self.assertEqual(validate(path), [])
+
+    def test_tiny_note_with_explicit_tuplet_ratio_has_no_findings(self) -> None:
+        source = (ROOT / "FATAL-06/FATAL-06a.musicxml").read_text()
+        replacement = (
+            "<duration>1</duration>\n"
+            "        <voice>1</voice>\n"
+            "        <time-modification>\n"
+            "          <actual-notes>4</actual-notes>\n"
+            "          <normal-notes>1</normal-notes>\n"
+            "          <normal-type>1024th</normal-type>\n"
+            "        </time-modification>"
+        )
+        corrected = source.replace(
+            "<duration>1</duration>\n        <voice>1</voice>",
+            replacement,
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "tiny-tuplet.musicxml"
+            path.write_text(corrected)
+            self.assertEqual(validate(path), [])
+
 
 if __name__ == "__main__":
     unittest.main()

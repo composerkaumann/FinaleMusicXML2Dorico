@@ -1,0 +1,115 @@
+{
+  "id": "FATAL-06",
+  "title": "Finale raw entry duration boundary tests",
+  "status": "complete",
+  "derived_from": "../BASE/FMD-BASE.musx",
+  "shared_source_file": "FATAL-06.musx",
+  "source_provenance": {
+    "separate_musx_variant_snapshots_present": false,
+    "shared_source_saved_after_both_exports": true,
+    "source_to_06a_parity_confirmed": false,
+    "source_to_06b_parity_confirmed": false,
+    "analysis_basis": "The separately preserved MusicXML exports and user-reported Dorico results."
+  },
+  "test_location": {
+    "part_id": "P1",
+    "measure": "2",
+    "voice": "1",
+    "note_index": 2
+  },
+  "zero_duration_attempt": {
+    "requested_finale_duration_edu": 0,
+    "accepted_and_preserved_by_finale": false,
+    "export_file": null,
+    "result": "User reports that Finale does not retain zero as an entry duration."
+  },
+  "variants": [
+    {
+      "id": "FATAL-06a",
+      "export_file": "FATAL-06a.musicxml",
+      "source_file_snapshot": null,
+      "finale_input": {
+        "measure_2_pitches": ["C4", "C4", "C4", "C4"],
+        "requested_note_durations_edu": [1024, 1, 1024, 1024]
+      },
+      "xml_observation": {
+        "xml_well_formed": true,
+        "divisions": 1024,
+        "time_signature": "4/4",
+        "expected_measure_duration": 4096,
+        "actual_measure_extent": 3073,
+        "measure_2_note_durations": [1024, 1, 1024, 1024],
+        "second_note_duration_quarter_beats": "1/1024",
+        "second_note_type": null,
+        "second_note_is_grace": false,
+        "second_note_has_time_modification": false,
+        "control_measures_1_3_4_match_base_normalized_content": true,
+        "validator_findings": 1
+      },
+      "classification": {
+        "severity": "warning",
+        "fatal": false,
+        "rule_id": "FMD006",
+        "category": "tiny-untyped-note",
+        "schema_error_claimed": false
+      },
+      "dorico_result": {
+        "application": "Dorico",
+        "version": "6.2.31",
+        "version_basis": "Last version reported in the same test session.",
+        "import_completed": true,
+        "unusual_durations_reported": true,
+        "quantization_suspected_by_user": true,
+        "exact_imported_durations": null,
+        "later_measures_intact": true,
+        "fatal_data_loss_reported": false,
+        "evidence_file": null
+      }
+    },
+    {
+      "id": "FATAL-06b",
+      "export_file": "FATAL-06b.musicxml",
+      "source_file_snapshot": null,
+      "finale_input": {
+        "measure_2_pitches": ["C4", "C4", "C4", "C4"],
+        "requested_note_durations_edu": [1024, 1025, 1024, 1024]
+      },
+      "xml_observation": {
+        "xml_well_formed": true,
+        "divisions": 2,
+        "time_signature": "4/4",
+        "expected_measure_duration": 8,
+        "actual_measure_extent": 8,
+        "measure_2_note_durations": [2, 2, 2, 2],
+        "second_note_duration_quarter_beats": "1",
+        "second_note_type": null,
+        "second_note_is_grace": false,
+        "second_note_has_time_modification": false,
+        "requested_1025_edu_difference_preserved_in_export": false,
+        "control_measures_1_3_4_match_base_normalized_content": true,
+        "validator_findings": 0
+      },
+      "classification": {
+        "severity": "none",
+        "fatal": false,
+        "rule_id": null,
+        "conclusion": "The export already contains four exact quarter-note durations; the slight source duration difference cannot be attributed to Dorico normalization."
+      },
+      "dorico_result": {
+        "application": "Dorico",
+        "version": "6.2.31",
+        "version_basis": "Last version reported in the same test session.",
+        "import_completed": true,
+        "four_quarter_notes_reported": true,
+        "later_measures_intact": true,
+        "data_loss_reported": false,
+        "evidence_file": null
+      }
+    }
+  ],
+  "sha256": {
+    "FATAL-06.musx": "456c2f2c6662e832fc8f0e3663784456b57e71c2e87a791a7e51eb9a6bd1535d",
+    "FATAL-06a.musicxml": "843e869380ce93cbe674ab9154b897d5f95bb5c2968d0d801db625ed2101b447",
+    "FATAL-06b.musicxml": "1244ec46a5508bfedb77f4deb39a9276d1c879707da34358b1d69acd6c0ec2ae"
+  }
+}

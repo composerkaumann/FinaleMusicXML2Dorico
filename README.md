@@ -68,6 +68,9 @@ Praegu rakendatud reeglid:
 - `FMD005` — ühe takti sees lõppeva, selgesõnalise
   `normal-type`-iga trioleti noodid katavad määratletust lühema
   ajavahemiku (`warning`; FATAL-04a põhjustas Doricos lisalööke).
+- `FMD006` — ilma noodiväärtuse ja tupletisuhte kirjelduseta tavaline
+  helikõrgusega noot on lühem kui 1024ndiknoot (`warning`;
+  FATAL-06a impordis näitas Dorico ebaharilikke vältusi).
 
 ## Teadaolev piirang
 
@@ -105,7 +108,12 @@ Reegel vajab kitsendamist ja Dorico versioonide mõju kontrolli;
 10. `FATAL-05` — cross-staff katse; Dorico 6.2.31 säilitas noodid
     lähtereal. Eksport ei kodeeri teise rea määramist; juhtum ei ole
     fatal, praegune `FMD003` annab teadaoleva valepositiivse leiu
-11. `FATAL-06` — illegal MusicXML duration
-12. `FATAL-07` — Human Playback hidden-note rhythmic residue
+11. `FATAL-06` — nullkestust Finale ei säilita; XML-eksporti ei tekkinud
+12. `FATAL-06a` — teise noodi kestus 1 EDU säilis XML-is ilma
+    `type`-ita; Dorico näitas ebaharilikke vältusi, hilisemad taktid
+    korras; `warning`
+13. `FATAL-06b` — teise noodi 1025 EDU erinevus puudub juba ekspordis,
+    Doricos neli veerandnooti ja hilisemad taktid korras; leiuta kontroll
+14. `FATAL-07` — Human Playback hidden-note rhythmic residue
 
 Teste tehakse rangelt selles järjekorras.
