@@ -2,6 +2,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from xml.etree import ElementTree as ET
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -172,6 +173,29 @@ class MeasureDurationTests(unittest.TestCase):
             path = Path(directory) / "tiny-tuplet.musicxml"
             path.write_text(corrected)
             self.assertEqual(validate(path), [])
+
+    def test_fatal_07a_trill_control_has_no_findings(self) -> None:
+        self.assertEqual(
+            validate(ROOT / "FATAL-07/FATAL-07a.musicxml"),
+            [],
+        )
+
+    def test_fatal_07b_balanced_hidden_trill_notes_have_no_findings(self) -> None:
+        path = ROOT / "FATAL-07/FATAL-07b.musicxml"
+        measure = ET.parse(path).getroot().find(
+            "./part[@id='P1']/measure[@number='2']"
+        )
+        self.assertIsNotNone(measure)
+        hidden = [
+            note for note in measure.findall("note")
+            if note.get("print-object") == "no"
+        ]
+        self.assertEqual(len(hidden), 14)
+        self.assertEqual(
+            sum(int(note.findtext("duration")) for note in hidden),
+            2048,
+        )
+        self.assertEqual(validate(path), [])
 
 
 if __name__ == "__main__":

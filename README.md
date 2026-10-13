@@ -114,6 +114,10 @@ Reegel vajab kitsendamist ja Dorico versioonide mõju kontrolli;
     korras; `warning`
 13. `FATAL-06b` — teise noodi 1025 EDU erinevus puudub juba ekspordis,
     Doricos neli veerandnooti ja hilisemad taktid korras; leiuta kontroll
-14. `FATAL-07` — Human Playback hidden-note rhythmic residue
+14. `FATAL-07a` — C4 trilliga poolnoot ja G4 poolnoot ilma rakendatud
+    Human Playbackita; Dorico 6.2.31 import korras, leiuta kontroll
+15. `FATAL-07b` — Human Playback lisab 14 peidetud C4–D4 nooti;
+    ajajoon on täpselt 4/4 ja Dorico 6.2.31 jätab peidetud noodid
+    tähelepanuta; leiuta kontroll
 
 Teste tehakse rangelt selles järjekorras.

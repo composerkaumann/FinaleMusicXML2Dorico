@@ -1,0 +1,113 @@
+{
+  "id": "FATAL-07",
+  "title": "Human Playback hidden trill notes with a balanced rhythmic timeline",
+  "status": "complete",
+  "test_location": {"part_id": "P1", "measure": "2"},
+  "variants": [
+    {
+      "id": "FATAL-07a",
+      "source_file": "FATAL-07a.musx",
+      "export_file": "FATAL-07a.musicxml",
+      "derived_from": "../BASE/FMD-BASE.musx",
+      "role": "trill-without-applied-human-playback-control",
+      "finale_content": {
+        "measure_2": "C4 half note with trill, followed by G4 half note",
+        "apply_human_playback_used": false
+      },
+      "xml_observation": {
+        "xml_well_formed": true,
+        "divisions": 2,
+        "time_signature": "4/4",
+        "expected_measure_duration": 8,
+        "actual_measure_extent": 8,
+        "voice_1_note_durations": [4, 4],
+        "visible_note_count": 2,
+        "hidden_note_count": 0,
+        "cue_note_count": 0,
+        "trill_mark_count": 1,
+        "control_measures_1_3_4_match_base_normalized_content": true,
+        "validator_findings": 0
+      },
+      "classification": {"severity": "none", "fatal": false},
+      "dorico_result": {
+        "application": "Dorico",
+        "version": "6.2.31",
+        "import_completed": true,
+        "data_loss_reported": false,
+        "later_measures_result_explicitly_reported": false,
+        "evidence": "User report",
+        "evidence_file": null
+      },
+      "source_export_parity": {
+        "source_saved_after_export_seconds": 2,
+        "exact_state_parity_confirmed": false
+      }
+    },
+    {
+      "id": "FATAL-07b",
+      "source_file": "FATAL-07b.musx",
+      "export_file": "FATAL-07b.musicxml",
+      "derived_from": "FATAL-07a.musx",
+      "role": "applied-human-playback-hidden-notes-control",
+      "finale_content": {
+        "measure_2": "Same C4 and G4 half notes and trill as 07a",
+        "apply_human_playback_used": true
+      },
+      "xml_observation": {
+        "xml_well_formed": true,
+        "divisions": 1024,
+        "time_signature": "4/4",
+        "expected_measure_duration": 4096,
+        "actual_measure_extent": 4096,
+        "voice_1_note_durations": [2048, 2048],
+        "visible_note_count": 2,
+        "cue_note_count": 1,
+        "cue_note": "Visible C4 half note with trill and type size=full",
+        "hidden_note_count": 14,
+        "hidden_note_voice": "2",
+        "hidden_note_pitches": ["C4", "D4", "C4", "D4", "C4", "D4", "C4", "D4", "C4", "D4", "C4", "D4", "C4", "D4"],
+        "hidden_note_durations": [146, 146, 146, 146, 146, 146, 146, 146, 146, 146, 146, 146, 146, 150],
+        "hidden_note_duration_sum": 2048,
+        "hidden_notes_print_object": "no",
+        "hidden_notes_print_spacing": "no",
+        "hidden_notes_type_present": false,
+        "backup_duration": 2048,
+        "trill_mark_count": 1,
+        "control_measures_1_3_4_match_base_normalized_content": true,
+        "validator_findings": 0
+      },
+      "classification": {
+        "severity": "none",
+        "fatal": false,
+        "conclusion": "Human Playback generated hidden trill notes, but their timeline is balanced and the user reports that Dorico ignores them."
+      },
+      "dorico_result": {
+        "application": "Dorico",
+        "version": "6.2.31",
+        "import_completed": true,
+        "hidden_notes_ignored_reported": true,
+        "cue_note_interpretation_verified": false,
+        "data_loss_reported": false,
+        "later_measures_result_explicitly_reported": false,
+        "evidence": "User report",
+        "evidence_file": null
+      },
+      "source_export_parity": {
+        "source_saved_after_export_seconds": 4,
+        "exact_state_parity_confirmed": false
+      }
+    }
+  ],
+  "validator_conclusion": {
+    "new_rule_added": false,
+    "regression_controls_added": true,
+    "hidden_notes_still_included_in_timeline_calculation": true,
+    "scope": "No fatal rhythmic residue was reproduced in this balanced control pair; this does not generalize to every Human Playback output."
+  },
+  "sha256": {
+    "FATAL-07a.musx": "a525823c19846ad16cf31f9d33e4c41be4564c2d59913e743375af663e12ac6a",
+    "FATAL-07a.musicxml": "0647529d4cb5567285b26b583494d6e19e319e55f36624cc4587d65631b5f76e",
+    "FATAL-07b.musx": "92c198ce0e5abbc4a115a521f65ff5ab1574ce287001ac67212931c2c7d3a9d6",
+    "FATAL-07b.musicxml": "48dbeab95b5a1fe1a6f3f738850067ae2066bc8b34b42188731b7a132429147a"
+  }
+}
