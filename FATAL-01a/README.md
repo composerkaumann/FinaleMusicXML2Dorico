@@ -1,39 +1,37 @@
-# FATAL-01a — conflicting measure durations between parts
+# FATAL-01a conflicting measure durations between parts
 
-## Eesmärk
+## Purpose
 
-Kontrollida, kuidas Dorico käsitleb sama takti erinevat kestust kahes
-instrumendis.
+Test how Dorico handles different durations in the same measure of two
+simultaneous instruments.
 
-## Finale'i test
+## Finale test
 
-FMD-BASE-ist loodi kahe instrumendiga koopia. Taktis 2:
+A two-instrument copy was made from FMD-BASE. In measure 2:
 
-- P1: kolm C4 veerandnooti ja üks C4 poolnoot, kokku 5 lööki;
-- P2: neli C4 veerandnooti, kokku 4 lööki.
+- P1 contains three C4 quarter notes and one C4 half note: five beats.
+- P2 contains four C4 quarter notes: four beats.
 
-Taktid 1, 3 ja 4 on mõlemas instrumendis rütmiliselt korrektsed.
+Measures 1, 3, and 4 are rhythmically complete in both instruments.
 
-Failid:
+Files: [FATAL-01a.musx](FATAL-01a.musx) and
+[FATAL-01a.musicxml](FATAL-01a.musicxml).
 
-- \`FATAL-01a.musx\`
-- \`FATAL-01a.musicxml\`
+## XML result
 
-## XML-i tulemus
+- Both parts declare a 4/4 measure duration of 8 division units.
+- P1 measure 2 reaches 10 units.
+- P2 measure 2 reaches 8 units.
+- The difference is 2 units, or one quarter-note beat.
+- The XML is well-formed.
 
-- mõlemad partiid deklareerivad 4/4 takti kestuseks 8 division’it;
-- P1 takti 2 tegelik ulatus on 10;
-- P2 takti 2 tegelik ulatus on 8;
-- partiiülene erinevus on 2 division’it ehk üks veerandnoot;
-- XML on well-formed.
+The validator reports `FMD001` for the overflow in P1 and `FMD002` for the
+difference between parts. Both findings have severity `warning`.
 
-Validaator annab P1 ületäituvuse kohta \`FMD001\` ja partiide omavahelise
-erinevuse kohta \`FMD002\`. Mõlema raskusaste on \`warning\`.
+## Dorico result
 
-## Dorico tulemus
+Dorico 6.2.30 completed the import and added a quarter rest to the second staff.
 
-Dorico 6.2.30 import õnnestus. Teisele reale lisandus veerandpaus.
-
-Tulemus on kooskõlas sellega, et Dorico võttis takti ulatuseks pikema P1
-ajajoone (10) ja täitis P2 puuduva kestuse 2 division’i pikkuse pausiga.
-See seletus on XML-i ja nähtava tulemuse põhjal tehtud järeldus.
+This is consistent with Dorico using the longer P1 timeline of 10 units and
+padding P2 with the missing 2 units. That explanation is an inference from
+the XML and the observed result, not a traced importer operation.

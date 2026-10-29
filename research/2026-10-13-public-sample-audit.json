@@ -1,0 +1,97 @@
+{
+  "audit_date": "2026-10-13",
+  "validator_revision": "6f271290c08c21e9766d6d2929bf788055d695c7",
+  "dorico_run_by_this_audit": false,
+  "external_scores_in_repository": false,
+  "purpose": "Read-only XML inspection of public forum attachments; not confirmed Dorico 6.2.31 regression fixtures.",
+  "samples": [
+    {
+      "candidate_id": "C04",
+      "variant": "original",
+      "thread_url": "https://forums.steinberg.net/t/musicxml-import-problem/1038436",
+      "attachment_url": "https://forums.steinberg.net/uploads/short-url/lbHSzP6cr7IdykbdJBDFIAh5p2u.musicxml",
+      "sha256": "0bc588dff69ba3f9437e836367c951ee85e1cf78c488bc375f26c7d921df4bd4",
+      "encoding_software": ["MuseScore Studio 4.7.3"],
+      "part_id": "P21",
+      "part_name": "Violoncello",
+      "measure_number": "108",
+      "dynamics_p_count_in_measure": 1651,
+      "identical_dynamics_direction_count_in_measure": 1651,
+      "all_direction_count_in_score": 2762,
+      "all_dynamics_count_in_score": 2189,
+      "validator_findings_total": 0,
+      "reported_dorico_version": null,
+      "reported_symptom": "Import hangs at 55%; other users reproduce and report that Finale/Sibelius re-exports also hang."
+    },
+    {
+      "candidate_id": "C04",
+      "variant": "fixed",
+      "thread_url": "https://forums.steinberg.net/t/musicxml-import-problem/1038436",
+      "attachment_url": "https://forums.steinberg.net/uploads/short-url/dq0mQVZFhH7JIsDPVArqn2F1oXz.musicxml",
+      "sha256": "dd051e615580024f9ccbca98bb7b4fa84d44f33fa5179e498d21bf80a8b22d24",
+      "encoding_software": ["MuseScore Studio 4.7.3"],
+      "part_id": "P21",
+      "measure_number": "108",
+      "dynamics_p_count_in_measure": 1,
+      "all_direction_count_in_score": 1112,
+      "all_dynamics_count_in_score": 539,
+      "validator_findings_total": 0,
+      "comparison_with_original": {
+        "removed_identical_direction_count": 1650,
+        "xml_trees_equal_after_removal_and_ignoring_formatting_whitespace": true,
+        "comparison_includes_tags_attributes_trimmed_text_and_child_order": true,
+        "comparison_includes_comments_processing_instructions_doctype_and_raw_bytes": false
+      },
+      "reported_symptom": "Other forum users open the fixed file."
+    },
+    {
+      "candidate_id": "C03",
+      "thread_url": "https://forums.steinberg.net/t/musicxml-import-fails-in-dorico-but-is-ok-in-musescore/930724",
+      "attachment_url": "https://forums.steinberg.net/uploads/short-url/hR70YpBxFAFdWidctbBx37OR0dc.xml",
+      "sha256": "7a139fd5f587da3dee1f187a4ce682d640a16e834cc7844048e5663a4b9aa50b",
+      "encoding_software": ["Soundslice MusicXML exporter"],
+      "part_id": "P2",
+      "measure_number": "15",
+      "divisions": 96,
+      "active_time_signature": "3/4",
+      "expected_measure_duration": 288,
+      "observed_measure_extent": 288,
+      "time_modification_3_to_2_voices_on_staff_1": ["1", "2", "3"],
+      "explicit_tuplet_notation_count_in_target_measure": 0,
+      "voice_2_example": {
+        "pitch": "G4",
+        "type": "eighth",
+        "duration": 32,
+        "ordinary_eighth_duration_at_active_divisions": 48
+      },
+      "validator_findings_total": 23,
+      "validator_rule_counts": {"FMD001": 9, "FMD004": 1, "FMD002": 13},
+      "validator_findings_at_target_part_and_measure": 0,
+      "reported_dorico_version": null,
+      "thread_date": "2024-08-29",
+      "reported_symptom": "Bars blank after bar 16; Richard Lanyon diagnoses incorrect tuplets in a multi-voice passage in bar 15."
+    },
+    {
+      "candidate_id": "C02",
+      "thread_url": "https://forums.steinberg.net/t/problem-opening-large-musicxml-files/85024",
+      "attachment_url": "https://forums.steinberg.net/uploads/short-url/7BKYjtZKfggNO3bkfAMr60Q9prB.zip",
+      "archive_member": "Etude_in_G_Minor_La_Campanella_S._1413.xml",
+      "xml_member_sha256": "c1c20910aa8436a146a73b4f07777606ef1a091ecfa04d6f28c09e2628827f6e",
+      "encoding_software": ["MuseScore 2.0.3.1"],
+      "part_id": "P1",
+      "divisions": 480,
+      "group_observations": [
+        {"measure_number": "78", "ratio": "17:12", "type": "32nd", "voice": "1", "non_chord_note_count": 17, "duration_each": 42, "sum_duration": 714, "expected_group_span": 720, "following_cursor_move": {"element": "forward", "duration": 6}},
+        {"measure_number": "79", "ratio": "17:12", "type": "32nd", "voice": "1", "non_chord_note_count": 17, "duration_each": 42, "sum_duration": 714, "expected_group_span": 720, "following_cursor_move": {"element": "forward", "duration": 6}},
+        {"measure_number": "99", "ratio": "25:12", "type": "32nd", "voice": "1", "non_chord_note_count": 25, "duration_each": 29, "sum_duration": 725, "expected_group_span": 720, "exact_duration_each": "144/5", "following_cursor_move": {"element": "backup", "duration": 5}},
+        {"measure_number": "99", "ratio": "21:12", "type": "32nd", "voice": "1", "non_chord_note_count": 21, "duration_each": 34, "sum_duration": 714, "expected_group_span": 720, "following_cursor_move": {"element": "forward", "duration": 6}}
+      ],
+      "validator_findings_total": 12,
+      "validator_rule_counts": {"FMD003": 3, "FMD005": 9},
+      "validator_findings_at_measures_78_79_99": 0,
+      "reported_dorico_version": null,
+      "diagnosis_date": "2017-01-09",
+      "reported_symptom": "Dorico team reproduces crash and diagnoses tuplet-rounding problems; overfull group corrupts the rest of the voice stream."
+    }
+  ]
+}

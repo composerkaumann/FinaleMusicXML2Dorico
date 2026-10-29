@@ -1,68 +1,54 @@
-# FATAL-04 — terve triolett Finale Voice 2-s
+# FATAL-04 complete triplet in Finale Voice 2
 
-## Katse eesmärk
+## Purpose
 
-Kontrollida, kas Finale 27.4.1-st eksporditud täielik Voice 2 triolett
-impordib Dorico 6.2.30-sse korrektselt. FATAL-03-s viidi Voice 2-sse
-üksnes trioleti viimane noot ning eksport kaotas trioleti seose selle
-noodiga. Siin luuakse kogu triolett algusest peale Voice 2-s.
+Test whether a complete triplet entered in Finale 27.4.1 Voice 2 imports
+correctly into Dorico 6.2.30. FATAL-03 moved only the final triplet note
+to Voice 2, and that exported note lost its tuplet association. Here the
+entire triplet is entered in Voice 2 from the outset.
 
-`FATAL-04` on testiseeria tunnus; tegelik tulemus on korras import.
+`FATAL-04` is a case ID; the observed result is a successful import.
 
-## Finale'is tegemine
+## Finale preparation
 
-1. Tee `BASE/FMD-BASE.musx`-ist koopia `FATAL-04/FATAL-04.musx`.
-2. Sisesta ainult takti 2 Voice 1-sse neli C4 veerandnooti.
-3. Vali Speedy Entry ja liigu esimese Voice 1 C4 noodi juurde.
-   Vajuta apostroofi (`'`), et alustada selle noodi juurest Voice 2.
-   Kontrolli, et Speedy Entry näitab `V2`.
-4. Sea sisestuskursor G4 kõrgusele. Vajuta `Option+3` ja sisesta Voice 2-sse
-   kolm G4 veerandnooti 3:2 trioletina. Lisa samas Voice 2-s nende järele
-   üks G4 poolnoot. Nii on ka Voice 2 kogupikkus neli lööki.
-5. Salvesta ning ekspordi `FATAL-04/FATAL-04.musicxml` pakkimata kujul.
-   Seejärel impordi fail Doricosse ja kirjelda, kas taktid 2–4 ja mõlemad
-   hääled on alles.
+1. Duplicate `BASE/FMD-BASE.musx` as `FATAL-04/FATAL-04.musx`.
+2. In measure 2 only, enter four C4 quarter notes in Voice 1.
+3. In Speedy Entry, move to the first Voice 1 C4 and press apostrophe
+   (`'`) to start Voice 2 there. Confirm that Speedy Entry shows `V2`.
+4. Set the entry pitch to G4. Press `Option+3` and enter three G4 quarter
+   notes as a 3:2 triplet in Voice 2, followed by a G4 half note in that voice.
+   Voice 2 now also lasts four quarter-note beats.
+5. Save and export uncompressed `FATAL-04/FATAL-04.musicxml`, then import
+   it into Dorico and inspect both voices and measures 2–4.
 
-Ära kasuta `Edit Frame` ruute, kihte ega `Fill with Rests` käsku. Katse
-sisaldab ainult takti 2 tavapäraselt sisestatud kahte häält.
+Do not use Edit Frame flags, layers, or Fill with Rests. This case contains
+two voices entered normally in measure 2.
 
-## XML-is kontrollitav
+## XML checks and result
 
-- taktis 2 on kaks eri `<voice>` väärtust;
-- Voice 1 sisaldab nelja C4 veerandnooti;
-- Voice 2 sisaldab kolme G4 3:2 triolettveerandnooti ja G4 poolnooti;
-- trioleti start ja stop kuuluvad mõlemad Voice 2 nootidele;
-- kummagi hääle ajajoon täidab 4/4 takti eraldi;
-- taktid 1, 3 ja 4 vastavad BASE-failile pärast `divisions` normaliseerimist.
+The preserved export has the intended structure:
 
-Kui Finale eksport erineb sellest, kirjeldame tegelikku XML-i enne
-juhtumi klassifitseerimist.
+- `divisions=6`; 4/4 requires 24 division units.
+- Voice 1 contains four C4 quarter notes: `6 + 6 + 6 + 6`.
+- Voice 2 contains three G4 triplet quarter notes: `4 + 4 + 4`,
+  followed by a G4 half note lasting 12.
+- Each voice independently reaches 24 units.
+- The triplet starts and stops on Voice 2 notes; all three have 3:2
+  `time-modification`.
+- The XML is well-formed and uses `backup` elements between voices.
+- Measures 1, 3, and 4 match BASE after normalizing division units.
+- The validator reports no findings.
 
-## XML-i tulemus
+## Dorico result
 
-- `divisions` on 6; 4/4 takti kestus on 24 division'it;
-- Voice 1 sisaldab nelja C4 veerandnooti kestustega 6 + 6 + 6 + 6;
-- Voice 2 sisaldab kolme G4 triolettveerandnooti kestustega 4 + 4 + 4
-  ja G4 poolnooti kestusega 12;
-- mõlema hääle ajajoon ulatub eraldi 24 division'ini;
-- trioleti start ja stop on Voice 2 nootidel; kõigil kolmel on 3:2
-  `time-modification`;
-- XML kasutab häälte vahel `backup` elemente ning on süntaktiliselt
-  korrektne;
-- taktid 1, 3 ja 4 vastavad baasfailile pärast `divisions`
-  normaliseerimist;
-- validaator ei anna leide.
+The author reports an ideal import in Dorico 6.2.30. No screenshot is
+preserved for this case.
 
-## Dorico tulemus
+A complete, correctly timed Finale Voice 2 triplet is not inherently fatal.
+This successful control helps constrain future rules for the more specific
+broken structure in FATAL-03.
 
-Kasutaja sõnul avaneb MusicXML Dorico 6.2.30-s ideaalselt.
-Ekraanipilti selle katse jaoks ei salvestatud.
+## References
 
-Järeldus: terve, korrektselt ajastatud Finale Voice 2 triolett ei ole
-iseenesest fataalne. FATAL-03 viga nõuab täpsemat katkist struktuuri;
-see kontrolljuhtum aitab tulevasi reegleid piirata.
-
-## Allikad
-
-- [Finale for Mac: Multiple voices](https://usermanuals.finalemusic.com/FinaleMac/Content/Finale/Multiple_voices.htm)
-- [Finale for Mac: Tuplets](https://usermanuals.finalemusic.com/FinaleMac/Content/Finale/Tuplets.htm)
+- [Finale for Mac Multiple voices](https://usermanuals.finalemusic.com/FinaleMac/Content/Finale/Multiple_voices.htm)
+- [Finale for Mac Tuplets](https://usermanuals.finalemusic.com/FinaleMac/Content/Finale/Tuplets.htm)

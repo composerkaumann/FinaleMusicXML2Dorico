@@ -1,43 +1,38 @@
-# FATAL-02a — full-measure mixed-duration tuplet
+# FATAL-02a full-measure mixed-duration tuplet
 
-## Eesmärk
+## Purpose
 
-Eraldada FATAL-02 kaks võimalikku põhjust:
+Compare FATAL-02 with a measure that is filled exactly while retaining a
+mixed-duration 3:2 tuplet. This helps distinguish the observed behavior from
+a general claim that all mixed-duration tuplets are fatal.
 
-1. tupletit sisaldav alatäidetud takt;
-2. segakestustega 3:2 triolett.
+## Finale preparation
 
-## Finale'i test
+Duplicate `FATAL-02.musx` as `FATAL-02a.musx`. Change only the third C4
+triplet note in measure 2 from a half note to a whole note.
 
-Tee FATAL-02.musx-ist koopia nimega FATAL-02a.musx. Muuda ainult takti
-2 kolmas C4 triolettnoot poolnoodist täisnoodiks.
+The resulting material is:
 
-Takti 2 sihtsisu:
+- First C4: quarter note, 3:2.
+- Second C4: quarter note, 3:2.
+- Third C4: whole note, 3:2.
+- The same tuplet starts on the first note and stops on the third.
+- No rests are added.
 
-- esimene C4: veerandnoot, 3:2;
-- teine C4: veerandnoot, 3:2;
-- kolmas C4: täisnoot, 3:2;
-- sama tuplet algab esimesel ja lõpeb kolmandal noodil;
-- pause ei lisata.
+With `divisions=6`, the expected durations are
+`4 + 4 + 16 = 24`, exactly filling a 4/4 measure.
 
-Eeldatava divisions=6 korral peaks XML-i kestus olema
-4 + 4 + 16 = 24, mis täidab 4/4 takti täpselt.
+## XML and Dorico result
 
-## Tulemuse tõlgendus
+Dorico 6.2.30 imports the file successfully:
 
-- Kui Dorico säilitab kolmanda noodi, oli FATAL-02 fataalse noodikao
-  peamine tingimus alatäidetud ajajoon.
-- Kui Dorico kaotab kolmanda noodi ka täidetud taktis, on fataalne
-  tingimus seotud segakestustega 3:2 trioletiga.
+- All three tuplet notes remain.
+- The exported measure timeline is exactly 24/24 division units.
+- Measures 3 and 4 remain.
+- The validator reports no findings.
 
-## Dorico tulemus
+Evidence: [Fatal02aDorico.png](Fatal02aDorico.png).
 
-Dorico 6.2.30 import õnnestus:
-
-- kõik kolm triolettnooti säilisid;
-- takti 2 ajajoon on täpselt 24/24 division’it;
-- taktid 3 ja 4 säilisid;
-- validaator ei anna leide.
-
-Järeldus: segakestustega 3:2 triolett ei ole iseenesest fataalne. FATAL-02
-noodikadu sõltub vigasest takti ajajoonest.
+A mixed-duration 3:2 tuplet is therefore not inherently fatal. This successful
+comparison does not establish that every fully filled tuplet measure will
+import correctly, or identify the sole cause of FATAL-02.

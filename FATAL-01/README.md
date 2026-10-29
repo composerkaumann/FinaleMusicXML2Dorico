@@ -1,37 +1,36 @@
-# FATAL-01 — measure duration mismatch
+# FATAL-01 measure duration mismatch
 
 ## Test
 
-Taktis 2 on kolm C4 veerandnooti ja üks C4 poolnoot. Materjali
-kogukestus on viis neljandiklööki 4/4 taktis.
+Measure 2 contains three C4 quarter notes followed by one C4 half note:
+five quarter-note beats in a 4/4 measure.
 
-Finale näitas MusicXML-i ekspordil hoiatust; eksporti jätkati.
+Finale displayed a warning during MusicXML export; export was continued.
 
-## XML-i tulemus
+## XML result
 
-- \`divisions = 2\`
-- 4/4 takti lubatud kestus: \`8\`
-- nootide kestused: \`2 + 2 + 2 + 4\`
-- tegelik ajajoone ulatus: \`10\`
-- ületäituvus: \`2\` ehk üks veerandnoot
-- XML on well-formed
-- taktid 1, 3 ja 4 on BASE-ekspordiga identsed
+- `divisions=2`.
+- Expected duration of the 4/4 measure: `8`.
+- Note durations: `2 + 2 + 2 + 4`.
+- Actual timeline extent: `10`.
+- Overflow: `2`, or one quarter-note beat.
+- The XML is well-formed.
+- Measures 1, 3, and 4 are identical to the BASE export.
 
-## Klassifikatsioon
+## Classification
 
-- reegel: \`FMD001\`
-- raskusaste: \`warning\`
-- kategooria: \`rhythmic-timeline\`
-- Dorico 6.2.30 jaoks fataalne: ei
+- Rule: `FMD001`.
+- Severity: `warning`.
+- Category: `rhythmic-timeline`.
+- Fatal in the observed Dorico 6.2.30 import: no.
 
-Reegel rakendub, kui partii takti ajajoone kõige kaugem positsioon on
-suurem kui aktiivse taktimõõdu põhjal arvutatud takti kestus.
+The rule applies when the furthest position reached by a part's measure
+timeline exceeds the duration implied by the active time signature.
 
-## Dorico tulemus
+## Dorico result
 
-Dorico 6.2.30 import õnnestus. Taktis 2 tekkis peidetud lokaalne
-taktimõõdumuutus. Taktid 3 ja 4 jäid korrektseks.
+Dorico 6.2.30 completed the import and inserted a hidden local time-signature
+change in measure 2. Measures 3 and 4 remained correct.
 
-Järeldus: ühe partii isoleeritud ületäituv takt ei katkesta selles testis
-importi. Dorico säilitab viis lööki lokaalse taktimõõduparandusega.
-
+In this single-part test, isolated measure overflow did not interrupt the
+import. Dorico retained five beats by changing the local meter.

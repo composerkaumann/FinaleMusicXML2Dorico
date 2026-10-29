@@ -1,64 +1,58 @@
-# FATAL-04b — Voice 1 triolett ja samaaegne Voice 2 poolnoot
+# FATAL-04b correct triplet with a simultaneous Voice 2 half note
 
-## Katse eesmärk
+## Purpose
 
-Kontrollida, kas takti 2 teises pooles Voice 1-s olev korrektne
-veerandnooditriolett koos samal ajal Voice 2-s oleva tavalise poolnoodiga
-impordib Doricosse korrektselt. See on FATAL-04a kontrollkatse: ainus
-plaanitud erinevus on trioleti definitsiooni noodiväärtus.
+Test a correctly defined Voice 1 quarter-note triplet in the second half
+of measure 2, simultaneous with an ordinary Voice 2 half note. This is the
+control for FATAL-04a: the intended difference is the tuplet definition's
+note unit, not the entered music.
 
-`FATAL` on testiseeria tunnus; see kontrollfail impordib korrektselt.
+`FATAL` is a series ID; this control imports correctly.
 
-## Finale'is tegemine
+## Finale preparation
 
-1. Tee `FATAL-04a/FATAL-04a.musx`-ist koopia
-   `FATAL-04b/FATAL-04b.musx`. Mõlemad katsed lähtuvad BASE-failist.
-2. Ava Voice 1 trioleti `Tuplet Definition` ning sea mõlemad
-   noodiväärtuse valikud `Quarter(s)` väärtusele: **3 veerandnooti
-   2 veerandnoodi ajas**. Jäta kõik noodid, hääled ja nende asukohad
-   muutmata.
-3. Salvesta `FATAL-04b.musx`, ekspordi pakkimata
-   `FATAL-04b.musicxml` ja impordi see Doricosse.
+1. Duplicate `FATAL-04a/FATAL-04a.musx` as
+   `FATAL-04b/FATAL-04b.musx`. Both cases derive from BASE.
+2. Open Tuplet Definition for the Voice 1 triplet and set both note-value
+   choices to `Quarter(s)`: **three quarters in the space of two quarters**.
+   Leave all notes, voices, and positions unchanged.
+3. Save `FATAL-04b.musx`, export uncompressed `FATAL-04b.musicxml`,
+   and import it into Dorico.
 
-Ära kasuta `Edit Frame` ruute ega `Fill with Rests` käsku. Kui Finale
-paigutab Voice 2 poolnoodi teise ajakohta või muudab Voice 1 noote,
-kirjelda tegelikku tulemust; ära paranda seda märkamatult ümber.
+Do not use Edit Frame flags or Fill with Rests. If Finale moves the Voice 2
+half note or changes Voice 1, describe the actual result rather than silently
+repairing it.
 
-## XML-is kontrollitav
+## XML checks and result
 
-- Voice 1 C4 poolnoot ja kolm G4 triolettveerandnooti katavad 4/4 takti;
-- Voice 2 E4 poolnoot algab kolmandal löögil ja kestab kaks lööki;
-- trioleti start/stop ja 3:2 `time-modification` on Voice 1 nootidel;
-- `backup` eristab hääli ning taktid 1, 3 ja 4 vastavad BASE-failile;
-- FATAL-04a XML-iga võrdlemisel peab noodimaterjal ja häälte asetus
-  jääma samaks, kui Finale seda lubab.
+- `divisions=6`; 4/4 requires 24 division units.
+- The Voice 1 C4 half note lasts 12; the three G4 triplet quarter notes
+  last `4 + 4 + 4`. The timeline ends at 24.
+- The Voice 2 E4 half note starts at offset 12 and ends at 24.
+- The triplet starts and stops in Voice 1. All three G4 notes have
+  3:2 `time-modification` without an explicit `normal-type`,
+  consistent with their `quarter` note value.
+- Compared with FATAL-04a, the XML differs only by omission of three
+  `<normal-type>half</normal-type>` elements.
+- Measures 1, 3, and 4 match BASE after normalizing division units.
+- The validator reports no findings.
 
-## Dorico tulemus
+## Dorico result
 
-Dorico 6.2.30 import õnnestus. Kasutaja sõnul lisab Dorico takti
-algusse downstem voice'i pausi; see on Voice 2 hilisema alguse
-ootuspärane esitus, mitte viga. 04a-s nähtud löökide lisandumist
-ega peidetud taktimõõtu ei täheldatud.
+Dorico 6.2.30 imports the file successfully. The author reports an initial
+rest in the downstem voice: this is the expected representation of Voice 2
+starting later in the measure, not an extra beat or an import error.
+The extra beats and hidden time signature seen in 04a were not reported.
 
-## XML-i tulemus
+A correct Voice 1 quarter-note triplet with a simultaneous ordinary Voice 2
+half note does not cause the error observed in 04a.
 
-- `divisions` on 6 ja 4/4 takti kestus 24 division'it;
-- Voice 1 C4 poolnoot kestab 12 ning kolm G4 triolettveerandnooti
-  kestavad 4 + 4 + 4; ajajoon lõpeb 24 juures;
-- Voice 2 E4 poolnoot algab offset'il 12 ja lõpeb 24 juures;
-- kõigil kolmel G4 noodil on 3:2 `time-modification`, kuid puudub
-  `normal-type`; see sobib nende `quarter`-noodiväärtusega;
-- XML erineb FATAL-04a-st täpselt kolme
-  `<normal-type>half</normal-type>` elemendi puudumise poolest;
-- taktid 1, 3 ja 4 vastavad BASE-failile pärast `divisions`-ühikute
-  ühtlustamist;
-- validaator ei anna leide.
+## Source provenance
 
-Järeldus: Voice 1 korrektne veerandnooditriolett ja sellega samaaegne
-Voice 2 poolnoot ei põhjusta Doricos viga. Voice 2 alguspausi ei tohi
-liigitada lisatud löögiks.
+The MUSX file was saved after the analyzed MusicXML export. Exact
+source/export state parity is not established by timestamps.
 
-## Allikad
+## References
 
-- [Finale for Mac: Multiple voices](https://usermanuals.finalemusic.com/FinaleMac/Content/Finale/Multiple_voices.htm)
-- [Finale for Mac: Tuplet Definition](https://usermanuals.finalemusic.com/FinaleMac/Content/Finale/TPDLG.htm)
+- [Finale for Mac Multiple voices](https://usermanuals.finalemusic.com/FinaleMac/Content/Finale/Multiple_voices.htm)
+- [Finale for Mac Tuplet Definition](https://usermanuals.finalemusic.com/FinaleMac/Content/Finale/TPDLG.htm)

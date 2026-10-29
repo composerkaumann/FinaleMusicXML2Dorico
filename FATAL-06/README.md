@@ -1,75 +1,73 @@
-# FATAL-06 — käsitsi muudetud Finale noodikestused
+# FATAL-06 manually edited Finale entry durations
 
-## Katse ülesehitus
+## Test setup
 
-Algse ühe noodireaga BASE-faili takti 2 sisestati neli C4 veerandnooti.
-Edit Frame'i kaudu muudeti ainult teise noodi kestust:
+Four C4 quarter notes were entered in measure 2 of the original single-staff
+BASE. Only the second note's duration was edited through Edit Frame:
 
-- nullkestuse katse: Finale ei säilita Duration väärtust 0;
-- 06a: Duration = 1 EDU;
+- Zero-duration attempt: Finale does not retain a Duration value of 0.
+- 06a: Duration = 1 EDU.
 - 06b: Duration = 1025 EDU.
 
-Finale'is on veerandnoot 1024 EDU. Nullkestusest XML-eksporti ei tekkinud.
-Kahe positiivse kestuse eksport on säilitatud eraldi failides
-`FATAL-06a.musicxml` ja `FATAL-06b.musicxml`.
+A Finale quarter note is 1024 EDU. No MusicXML export was produced for the
+rejected zero duration. The two positive-duration exports are preserved as
+[FATAL-06a.musicxml](FATAL-06a.musicxml) and
+[FATAL-06b.musicxml](FATAL-06b.musicxml).
 
-## XML-i ja Dorico tulemused
+## XML and Dorico results
 
-| Variant | Finale'i teise noodi kestus | XML-i divisions | XML-i teise noodi kestus | Teise noodi type | Tulemus |
+| Variant | Entered second-note duration | XML divisions | Exported second-note duration | Note type | Classification |
 | --- | --- | --- | --- | --- | --- |
-| 06a | 1 EDU | 1024 | 1 ehk 1/1024 veerandist | puudub | warning |
-| 06b | 1025 EDU | 2 | 2 ehk üks veerand | puudub | korras kontroll |
+| 06a | 1 EDU | 1024 | 1, or 1/1024 of a quarter note | Absent | Warning |
+| 06b | 1025 EDU | 2 | 2, or one quarter note | Absent | Successful control |
 
-06a XML-is säilis väga lühike kestus. Taktis 2 on kestused
-1024 + 1 + 1024 + 1024 = 3073 division'it, deklareeritud 4/4 kestus
-on 4096. Teisel noodil ei ole `grace`, `type` ega `time-modification`
-elementi. See kestus vastab 4096ndiknoodile.
+In 06a, the very short duration survives export. Measure 2 contains
+`1024 + 1 + 1024 + 1024 = 3073` division units, compared with the declared
+4/4 duration of 4096. The second note has no `grace`, `type`, or
+`time-modification`. Its duration equals a 4096th note.
 
-Kasutaja sõnul näitas Dorico 06a impordil ebaharilikke vältusi ning
-näis neid lähimatele võimalikele väärtustele ühtlustavat. Täpseid
-imporditud vältusi ei fikseerita, sest Dorico eksporditud faili ega
-ekraanipilti ei ole. Taktid 3 ja 4 olid kasutaja sõnul korras.
-Klassifikatsioon on **warning**, mitte fatal.
+The author reports unusual durations in Dorico and suspects that the importer
+rounded them to nearby notatable values. The exact imported durations were
+not recorded, and no Dorico export or screenshot is preserved. Measures 3
+and 4 reportedly remained correct. This is a **warning**, not fatal.
 
-06b XML-is on teise noodi kestus juba täpselt veerandnoot.
-1025 EDU ja tavapärase 1024 EDU vahe ei säilinud MusicXML-is:
-noodikestused on 2 + 2 + 2 + 2 = 8, mis täidavad 4/4 takti.
-Seetõttu ei saa selle katse põhjal omistada erinevuse eemaldamist
-Dorico importijale. Kasutaja nägi Doricos nelja veerandnooti ning
-hilisemad taktid olid korras. Klassifikatsioon on **none**.
+In 06b, the second note's exported duration is already exactly a quarter note.
+The difference between 1025 EDU and an ordinary 1024 EDU quarter note does
+not survive MusicXML export: `2 + 2 + 2 + 2 = 8` fills 4/4 exactly.
+The difference therefore cannot be attributed to normalization by Dorico.
+The author reports four quarter notes and correct later measures.
+Classification: **none**.
 
-Mõlema faili taktid 1, 3 ja 4 vastavad BASE-failile pärast divisions'i
-normaliseerimist. Mõlemas on üks partii ning kõik noodid hääles 1.
-Dorico versioonina arvestatakse sama katseseansi viimati teatatud
-versiooni 6.2.31; kasutaja ei korranud versiooninumbrit 06 tulemuses.
+In both exports, measures 1, 3, and 4 match BASE after normalizing division
+units. There is one part, with all notes in Voice 1. The Dorico version is
+recorded as 6.2.31, the last version reported in the same test session;
+the author did not repeat the number with the 06 results.
 
-## Tuvastusreegel FMD006
+## Detection rule FMD006
 
-`FMD006` annab warning'u tavalisele helikõrgusega noodile, millel:
+FMD006 reports a warning for a pitched, non-grace note that:
 
-- puuduvad `type` ja `time-modification`;
-- puudub `grace`;
-- positiivne kestus on lühem kui 1024ndiknoot.
+- Has neither `type` nor `time-modification`.
+- Has a positive duration shorter than a 1024th note.
 
-06a annab ühe leiu P1 takti 2 teisel noodil, 06b ei anna leide.
-1024ndiknoodi piiri peal olev kestus ning tupletisuhtega lühem noot
-on eraldi kontrollides leiuta.
+06a produces one finding on the second note of P1 measure 2; 06b produces
+none. Separate unit tests check the 1024th-note boundary and a shorter note
+with an explicit tuplet ratio; neither should produce this finding.
 
-MusicXML-i `type` on valikuline; selle puudumine üksi ei ole viga.
-Kõige lühem otsene graafiline noodiväärtus on `1024th`.
-Reegel osutab selles korpuses täheldatud impordiriskile, mitte
-MusicXML-i skeemiveale. Algset keelatud nullkestust ei õnnestunud
-Finale ekspordis tekitada.
+MusicXML `type` is optional. Its absence alone is not an error.
+The shortest directly named graphical note value is `1024th`.
+This rule identifies a risk observed in this corpus, not an XSD violation.
+The original zero-duration condition could not be produced through Finale.
 
-## Lähtefaili säilitamine
+## Source provenance
 
-Kataloogis on üks ühine `FATAL-06.musx`, salvestatud pärast mõlemat
-XML-eksporti. Eraldi 06a ja 06b MUSX-olekuid ei ole säilitatud.
-Ühise lähtefaili täpset vastavust kummalegi ekspordile ei kinnitata;
-analüüsi alus on vastava variandi MusicXML.
+One shared [FATAL-06.musx](FATAL-06.musx) was saved after both XML exports.
+Separate 06a and 06b MUSX snapshots are not preserved. Exact parity between
+that shared source and either export is unverified; each variant's analysis
+uses its preserved MusicXML.
 
-## Allikad
+## References
 
-- [Finale: Edit Frame ja EDU](https://usermanuals.finalemusic.com/FinaleMac/Content/Finale/SPFRMDLG.htm)
-- [MusicXML 4.0: note, sealhulgas valikuline type](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/note/)
-- [MusicXML 4.0: note-type-value](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/note-type-value/)
+- [Finale Edit Frame and EDU](https://usermanuals.finalemusic.com/FinaleMac/Content/Finale/SPFRMDLG.htm)
+- [MusicXML 4.0 note and optional type](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/note/)
+- [MusicXML 4.0 note-type-value](https://www.w3.org/2021/06/musicxml40/musicxml-reference/data-types/note-type-value/)

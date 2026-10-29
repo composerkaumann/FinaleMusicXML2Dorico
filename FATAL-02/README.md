@@ -1,63 +1,64 @@
-# FATAL-02 — tuplet timeline mismatch
+# FATAL-02 tuplet timeline mismatch
 
-## Eesmärk
+## Purpose
 
-Kontrollida olukorda, kus trioleti 3:2 definitsioon ja trioleti liikmete
-notatsiooniline kestus ei kirjelda sama ajavahemikku.
+Investigate a 3:2 triplet whose definition and edited member note values no
+longer describe the same group. Voice 2, cross-staff notation, and hidden
+notes are excluded to keep this case separate from the other experiments.
 
-See test hoiab Voice 2, cross-staff-noodid ja peidetud noodid välja, et
-mitte segada FATAL-03–FATAL-07 juhtumeid.
+## Finale preparation
 
-## Finale'i test
+Duplicate `BASE/FMD-BASE.musx` and change only measure 2:
 
-Loo FMD-BASE.musx-ist koopia ja muuda ainult takti 2:
+1. Enter three C4 quarter notes as a 3:2 triplet in Voice 1.
+2. Change the third triplet note to a half note.
+3. Leave the definition at three quarter notes in the space of two quarters.
+4. Do not add another voice, cross-staff notes, hidden notes, or rests.
+   Do not use Fill with Rests; that is the separate FATAL-02b condition.
+5. Save [FATAL-02.musx](FATAL-02.musx) and export
+   [FATAL-02.musicxml](FATAL-02.musicxml).
 
-1. loo Voice 1-s kolm C4 veerandnooti suhtes 3:2;
-2. pärast trioleti loomist muuda kolmas triolettnoot poolnoodiks;
-3. jäta trioleti definitsiooniks 3 veerandnooti 2 veerandnoodi ruumis;
-4. ära lisa teist voice'i, cross-staff-noote ega peidetud noote.
+If Finale displays an export warning, continue the export and record it.
+Whether a warning appeared in this particular test was not recorded.
 
-Failid:
+## XML inspection
 
-- FATAL-02.musx
-- FATAL-02.musicxml
+Check the active `divisions`, expected 4/4 duration, actual measure extent,
+each note's `duration` and `type`, the 3:2 `time-modification`, and the
+`notations/tuplet` start and stop boundaries. Compare measures 3 and 4 with
+the reference material.
 
-Kui Finale kuvab ekspordihoiatuse, jätka eksporti ja märgi hoiatus
-tulemuse juurde.
+MusicXML represents intended duration, time modification, and displayed
+tuplet boundaries separately.
 
-## XML-is kontrollitav
+## Dorico result
 
-- aktiivne divisions ja 4/4 takti oodatav kestus;
-- takti 2 tegelik ajajoone ulatus;
-- iga triolettnoodi duration;
-- iga triolettnoodi type;
-- time-modification/actual-notes ja normal-notes;
-- notations/tuplet start/stop piirid;
-- kas tuplet-liikmete kestus vastab deklareeritud 3:2 rühmale;
-- kas taktid 3 ja 4 jäävad kontrollmaterjalina terveks.
+Dorico 6.2.30 completes the import but loses musical content:
 
-MusicXML 4.0 käsitleb noodi tegelikku duration-kestust,
-time-modification suhet ja visuaalse trioleti start/stop märgendeid
-eraldi struktuuridena.
+- The first and second exported C4 notes remain.
+- The third exported C4 half note disappears.
+- Dorico inserts rests in place of missing time.
 
-## Dorico tulemus
+The result is shown in
+[FATAL-02exportresult.png](FATAL-02exportresult.png).
 
-Dorico 6.2.30 import lõpeb, kuid tulemus on fataalselt vigane:
+## Classification
 
-- XML-i esimene ja teine C4 säilivad;
-- XML-is olev kolmas C4 poolnoot kaob;
-- Dorico lisab puuduva aja asemele pause.
+- Rule: `FMD003`.
+- Severity: `fatal`.
+- Category: `tuplet-timeline`.
+- Current heuristic: a non-implicit measure containing a tuplet ends before
+  the duration implied by its active time signature.
 
-Tulemus on jäädvustatud failis FATAL-02exportresult.png.
+This file has an expected duration of 24 and an actual extent of 16 division
+units, leaving a shortfall of 8. The observed loss of a note establishes the
+case's fatal classification; the insertion of rests alone would not do so.
+The broader heuristic has a known false positive in
+[FATAL-05](../FATAL-05/README.md).
 
-## Klassifikatsioon
+## Source provenance
 
-- reegel: FMD003
-- raskusaste: fatal
-- kategooria: tuplet-timeline
-- tuvastus: tupletit sisaldava mitte-implicit takti tegelik ajajoon lõpeb
-  enne aktiivse taktimõõdu kestust
-
-Selles failis on oodatav kestus 24 ja tegelik kestus 16 division’it.
-Puudujääk on 8 division’it. Fataalsuse põhjus on kinnitatud noodikadu,
-mitte üksnes see, et Dorico lisab puuduvad pausid.
+The recorded MUSX checksum was corrected during the English documentation
+update to match the source already present in Git. Neither the source nor
+the export was modified. This checksum correction does not establish exact
+source/export parity; the preserved MusicXML remains the import evidence.

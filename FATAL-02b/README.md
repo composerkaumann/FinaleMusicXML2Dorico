@@ -1,41 +1,42 @@
-# FATAL-02b — overfilling rest after an incomplete tuplet
+# FATAL-02b overfilling rest after an incomplete tuplet
 
-## Finale'i test
+## Finale preparation
 
-Takt 2 sisaldab sama materjali nagu FATAL-02:
+Measure 2 initially contains the same material as FATAL-02:
 
-- C4 veerandnoot, 3:2;
-- C4 veerandnoot, 3:2;
-- C4 poolnoot, 3:2;
-- tuplet algab esimesel ja lõpeb kolmandal noodil.
+- C4 quarter note, 3:2.
+- C4 quarter note, 3:2.
+- C4 half note, 3:2.
+- The tuplet starts on the first note and stops on the third.
 
-Seejärel käivitati Finale'is Fill with Rests. Finale lisas poolpausi,
-kuigi tegelik vaba ruum ei vastanud enam poolnoodile.
+Finale's Fill with Rests was then applied. It added a half rest even though
+the available space no longer matched a half-note duration.
 
-## XML-i tulemus
+## XML result
 
-- divisions: 6
-- 4/4 takti oodatav kestus: 24
-- tupletnootide kestus: 4 + 4 + 8 = 16
-- lisatud poolpausi kestus: 12
-- takti tegelik ulatus: 28
-- ületäituvus: 4 division’it
+- `divisions=6`.
+- Expected duration of the 4/4 measure: 24.
+- Tuplet note durations: `4 + 4 + 8 = 16`.
+- Added half-rest duration: 12.
+- Actual measure extent: 28.
+- Overflow: 4 division units.
 
-Tegelik vaba ruum enne pausi oli 8 division’it, kuid Finale eksportis
-pausi kestusega 12.
+Only 8 division units were available before the added rest, but Finale
+exported a rest lasting 12.
 
-## Dorico tulemus
+## Dorico result
 
-Dorico 6.2.30 import lõpeb, kuid tulemus on fataalselt vigane. Kolmas
-XML-is olev C4 poolnoot kaob ning Dorico näitab selle asemel pause.
-Tulemus on failis Fatal02bDorico.png.
+Dorico 6.2.30 completes the import but loses the third exported C4 half note
+and displays rests instead. The result is documented in
+[Fatal02bDorico.png](Fatal02bDorico.png).
 
-## Klassifikatsioon
+## Classification
 
-- reegel: FMD004
-- raskusaste: fatal
-- kategooria: tuplet-rest-fill-timeline
+- Rule: `FMD004`.
+- Severity: `fatal`.
+- Category: `tuplet-rest-fill-timeline`.
 
-Reegel tuvastab tupletit ja pause sisaldava takti, mille ajajoon ulatub
-aktiivse taktimõõdu kestusest kaugemale.
-
+The current rule detects a measure containing tuplets and rests whose
+timeline exceeds the active meter. The fatal classification is confirmed
+for this particular export; the heuristic does not establish that all
+overfilled measures containing tuplets and rests cause note loss.

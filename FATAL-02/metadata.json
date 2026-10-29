@@ -79,8 +79,14 @@
     "classification_confirmed_by_user": true
   },
   "sha256": {
-    "FATAL-02.musx": "eeaab0517d3e664b80aef922b75d774f4aa6a6263b0223f26b61bab57e59cc5c",
+    "FATAL-02.musx": "5ff8de3b10ba626ebb279084d4d361f9aae1d53d6d44efa97a131cd090dfd85d",
     "FATAL-02.musicxml": "29380c9249fe40a5a132014827f3e84ce872e213a5e18b5a94089fe92188a060",
     "FATAL-02exportresult.png": "2b953351b83d0cf03e75c24ac66ef86ae413980be9c73e8ecdb789919eadce08"
+  },
+  "checksum_record_correction": {
+    "date": "2026-10-29",
+    "previous_recorded_source_sha256": "eeaab0517d3e664b80aef922b75d774f4aa6a6263b0223f26b61bab57e59cc5c",
+    "reason": "The recorded checksum did not match the MUSX file already tracked in Git. The record was corrected without modifying the source or export.",
+    "source_export_parity_established_by_this_update": false
   }
 }

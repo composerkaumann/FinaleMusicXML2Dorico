@@ -1,89 +1,81 @@
-# FATAL-04a — Voice 1 triolett ja Voice 2 poolnoot, vale definitsioon
+# FATAL-04a quarter-note triplet with a half-note definition
 
-## Katse eesmärk
+## Purpose
 
-Kontrollida, mida Finale 27.4.1 ekspordib, kui takti 2 teises pooles
-on Voice 1-s kolm veerandnooti 3:2 triolettina ja nendega samal ajal
-Voice 2-s tavaline poolnoot, kuid trioleti definitsioonis on määratud
-**3 poolnooti 2 poolnoodi ajas**.
+Test what Finale 27.4.1 exports when Voice 1 contains a quarter-note triplet
+in the second half of measure 2, simultaneous with an ordinary Voice 2
+half note, but the triplet definition is **three half notes in the space
+of two half notes**.
 
-Suhe on mõlemal juhul 3:2, ent definitsiooni noodiväärtus erineb
-tegelikult sisestatud nootidest. Paariskatse FATAL-04b kasutab sama
-noodimaterjali ja Voice 2 poolnooti, aga õiget trioleti definitsiooni.
-Nii saab eristada valest definitsioonist tuleneva mõju kahe hääle
-koosesinemisest. Nimetuses `FATAL` on seerianumber; tegelik raskusaste
-on **warning**, mitte fatal.
+The ratio is still 3:2, but the definition's note unit differs from the
+entered notes. FATAL-04b uses the same music and simultaneous Voice 2 note
+with the correct definition. The observed classification here is
+**warning**, not fatal.
 
-## Finale'is tegemine
+## Finale preparation
 
-1. Tee `BASE/FMD-BASE.musx`-ist koopia `FATAL-04a/FATAL-04a.musx`.
-2. Sisesta ainult takti 2 Voice 1-sse C4 poolnoot takti algusse ning
-   teise poolde kolm G4 veerandnooti tavalise 3:2 trioletina.
-3. Käivita Voice 2 trioleti esimese G4 noodi juurest (kolmas löök)
-   ja sisesta sinna tavaline E4 poolnoot. Ära tee Voice 2-s trioletti.
-4. Ava Voice 1 trioleti `Tuplet Definition` ning muuda mõlemad
-   noodiväärtuse valikud `Quarter(s)` väärtuselt `Half(s)` väärtusele.
-   Numbrid jäävad **3** ja **2**. Ära muuda sisestatud kolme G4 noodi
-   väärtust, Voice 2 E4 poolnooti ega lisa pause.
-5. Salvesta `FATAL-04a.musx`, ekspordi pakkimata
-   `FATAL-04a.musicxml` ja impordi see Doricosse.
+1. Duplicate `BASE/FMD-BASE.musx` as `FATAL-04a/FATAL-04a.musx`.
+2. In measure 2 only, enter a C4 half note in Voice 1, followed by three
+   G4 quarter notes as an ordinary 3:2 triplet.
+3. Launch Voice 2 from the first G4 triplet note, at beat 3, and enter
+   an ordinary E4 half note there. Do not make it a tuplet.
+4. Open Tuplet Definition for the Voice 1 triplet. Change both note-value
+   choices from `Quarter(s)` to `Half(s)`, retaining the numbers 3 and 2.
+   Leave the three G4 notes and the Voice 2 E4 half note unchanged.
+   Do not add rests.
+5. Save `FATAL-04a.musx`, export uncompressed `FATAL-04a.musicxml`,
+   and import it into Dorico.
 
-Finale'is saab juba loodud trioleti definitsiooni avada Tuplet Tooliga:
-klõpsa trioleti esimest nooti ning ava selle pide topeltklõpsuga
-definitsioon. Kui Finale pärast muudatust taktisisu ümber korraldab,
-jäta tulemus muutmata ja kirjelda seda koos ekspordiga.
-Ära kasuta `Edit Frame` ruute ega `Fill with Rests` käsku.
+To edit an existing triplet, use the Tuplet Tool, click its first note,
+and double-click the handle. If Finale rearranges the measure after the
+edit, preserve and describe that result. Do not use Edit Frame flags
+or Fill with Rests.
 
-## XML-is kontrollitav
+## XML inspection
 
-- Voice 1 C4 poolnoodi ja kolme G4 noodi ning Voice 2 E4 poolnoodi
-  tegelikud `duration`-kestused ja algushetked;
-- aktiivne `divisions` ning mõlema hääle ajajoone ulatus 4/4 suhtes;
-- G4 nootide `<type>`, `time-modification` ja võimalik `normal-type`;
-- trioleti start/stop ja võimalikud `tuplet-actual` / `tuplet-normal`
-  noodiväärtused;
-- häälte vaheline `backup` ning võrdlus FATAL-04b XML-iga;
-- taktid 1, 3 ja 4 võrreldes BASE-failiga.
+Check the durations and start positions in both voices, active division
+units, measure extent, G4 `type` and `time-modification`, any
+`normal-type`, tuplet start/stop and display units, and the `backup`
+elements. Compare with FATAL-04b and with the BASE control measures.
 
-## XML-i tulemus
+## XML result
 
-- XML on süntaktiliselt korrektne; `divisions` on 6 ja 4/4 takti
-  deklareeritud kestus 24 division'it.
-- Voice 1: C4 poolnoot kestusega 12, siis kolm G4 veerandnooti
-  kestustega 4 + 4 + 4. Seega lõpeb XML-i ajajoon täpselt 24 juures.
-- Voice 2: E4 poolnoot algab kolmandal löögil (offset 12) ja lõpeb
-  samuti 24 juures. Häälte vahel on `backup`-elemendid.
-- Kõigil kolmel G4 noodil on `time-modification` 3:2 ja
-  `normal-type` = `half`; `type` jääb `quarter`-iks. Nende tegelikud
-  kestused katavad kaks lööki, kuid poolnooditrioleti definitsioon
-  kirjeldab neljalöögilist vahemikku. See on tupletigrupi sisuline
-  vastuolu, mitte üle- või alatäidetud MusicXML-i ajajoon.
-- XML-is puudub taktis 2 taktimõõdumuutus. Taktid 1, 3 ja 4 vastavad
-  BASE-failile pärast `divisions`-ühikute ühtlustamist.
-- Validaatori `FMD005` annab ühe `warning`-leiu: tupletigrupi
-  määratletud ulatus on 24 division'it, gruppi kuuluvad noodid
-  katavad 12 division'it.
+- The XML is well-formed, with `divisions=6` and a declared 4/4 duration of 24.
+- Voice 1 has a C4 half note lasting 12, followed by G4 quarter notes
+  lasting `4 + 4 + 4`. Its timeline ends exactly at 24.
+- The Voice 2 E4 half note starts at offset 12, beat 3, and ends at 24.
+  `backup` elements separate the voices.
+- All three G4 notes have 3:2 `time-modification` and
+  `normal-type=half`, while `type` remains `quarter`. They cover two
+  beats, but the half-note definition describes four beats.
+- Measure 2 contains no time-signature change in the XML.
+- Measures 1, 3, and 4 match BASE after normalizing division units.
+- `FMD005` reports one warning: the declared group span is 24 division
+  units, but its notes cover 12.
 
-FATAL-04b kontrollfail erineb XML-is ainult kolme `normal-type`
-`half`-elemendi puudumise poolest. Sellega on eraldatud vale
-trioletidefinitsiooni mõju Voice 2 poolnoodi olemasolust.
+This is a tuplet-definition inconsistency despite a complete overall
+measure timeline. FATAL-04b differs only by omission of the three
+`<normal-type>half</normal-type>` elements, isolating this XML difference
+from the presence of the simultaneous Voice 2 half note.
 
-## Dorico tulemus
+## Dorico result
 
-Dorico 6.2.30 import õnnestus, kuid kasutaja sõnul lisandus takti 2
-lööke koos peidetud taktimõõduga. Ekraanipildil on näha lisatud pause
-ja taktimõõdu signpost; taktid 3 ja 4 on olemas.
+Dorico 6.2.30 completes the import. The author reports extra beats and a
+hidden time signature in measure 2. The screenshot shows added rests and a
+time-signature signpost; measures 3 and 4 remain. The exact number of added
+beats was not established from the screenshot.
 
-Järeldus: **warning** — import ei katke, kuid takt 2 muutub. Dorico
-täpset lisatud löökide arvu ekraanipildi põhjal ei fikseerita.
+Classification: **warning**. The import continues, but measure 2 changes.
 
-Tõendus: `FATAL-04aDorico.png`. Lähte-`musx` salvestati pärast
-`musicxml`-eksporti; seetõttu ei kinnita failide ajatemplid nende
-täielikku olekuühtsust. Analüüsi alus on eksporditud XML.
+Evidence: [FATAL-04aDorico.png](FATAL-04aDorico.png).
 
-## Allikad
+The MUSX source was saved after the analyzed MusicXML export. Timestamps
+alone do not establish exact source/export parity; the analysis refers
+to the preserved XML.
 
-- [Finale for Mac: Tuplet Definition](https://usermanuals.finalemusic.com/FinaleMac/Content/Finale/TPDLG.htm)
-- [Finale for Mac: Multiple voices](https://usermanuals.finalemusic.com/FinaleMac/Content/Finale/Multiple_voices.htm)
-- [MusicXML 4.0: time-modification](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/time-modification/)
-- [MusicXML 4.0: tuplet](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tuplet/)
+## References
+
+- [Finale for Mac Tuplet Definition](https://usermanuals.finalemusic.com/FinaleMac/Content/Finale/TPDLG.htm)
+- [Finale for Mac Multiple voices](https://usermanuals.finalemusic.com/FinaleMac/Content/Finale/Multiple_voices.htm)
+- [MusicXML 4.0 time-modification](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/time-modification/)
+- [MusicXML 4.0 tuplet](https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tuplet/)
